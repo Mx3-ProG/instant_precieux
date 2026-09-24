@@ -2425,15 +2425,11 @@ td span.appointment-badge.a_replanifier {
   }
 }
 
-/* Globe du dashboard : au doigt, la page défile par-dessus au lieu d’être bloquée. */
+/* Globe du dashboard : au doigt, un doigt fait tourner, deux doigts zooment. */
 .traffic-globe-hint-touch {
   display: none;
 }
 @media (pointer: coarse), (hover: none) {
-  .traffic-globe-canvas {
-    touch-action: pan-y;
-    cursor: default;
-  }
   .traffic-globe-hint-mouse {
     display: none;
   }

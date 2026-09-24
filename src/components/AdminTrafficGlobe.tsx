@@ -175,6 +175,7 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
             const location = point as LocationGroup;
             if (!globe) return;
             setSelectedKey(location.key);
+            globe.controls().autoRotate = false;
             globe.pointOfView({ lat: location.lat, lng: location.lng, altitude: 1.6 }, 700);
           })
           .pointOfView({ lat: 25, lng: 5, altitude: 2.15 });
@@ -185,10 +186,12 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
         controls.autoRotateSpeed = 0.42;
         controls.enableDamping = true;
         controls.dampingFactor = 0.08;
-        // Au doigt, le globe ne capture pas les gestes : la page doit pouvoir défiler par-dessus.
-        const touchOnly = !window.matchMedia("(pointer: fine)").matches;
-        controls.enableZoom = !touchOnly;
-        controls.enableRotate = !touchOnly;
+        // Souris : glisser + molette. Doigt : un doigt pour tourner, deux doigts pour zoomer.
+        controls.enableZoom = true;
+        controls.enableRotate = true;
+        controls.enablePan = false;
+        // Dès qu'on manipule le globe, il arrête de tourner seul pour ne pas perdre la ville visée.
+        controls.addEventListener("start", () => { controls.autoRotate = false; });
 
         const applyPalette = () => {
           if (!globe) return;
@@ -246,6 +249,7 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
 
   const focusLocation = (location: LocationGroup) => {
     setSelectedKey(location.key);
+    if (globeRef.current) globeRef.current.controls().autoRotate = false;
     globeRef.current?.pointOfView({ lat: location.lat, lng: location.lng, altitude: 1.6 }, 700);
   };
 
@@ -267,7 +271,7 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
           aria-label={`${locatedVisits} visites géolocalisées dans ${countries} pays. Globe interactif manipulable à la souris ou au toucher.`}
         />
         <span className="traffic-globe-hint traffic-globe-hint-mouse" aria-hidden="true">↔ Glisser pour explorer · molette pour zoomer</span>
-        <span className="traffic-globe-hint traffic-globe-hint-touch" aria-hidden="true">Touchez une ville ci-dessous pour la centrer</span>
+        <span className="traffic-globe-hint traffic-globe-hint-touch" aria-hidden="true">↔ Glisser pour tourner · pincer pour zoomer</span>
         {selectedLocation && <div className="traffic-globe-selection" aria-live="polite">
           <strong>{selectedLocation.city}</strong>
           <span>{selectedLocation.country} · {selectedLocation.visits} visite{selectedLocation.visits > 1 ? "s" : ""}</span>
