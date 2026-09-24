@@ -32,6 +32,7 @@ import { HeadSync, LangProvider, LanguageMenu, ThemeToggle, rich, useI18n, useSy
 import RisingParticles from "@/components/RisingParticles";
 import WatercolorBackground from "@/components/WatercolorBackground";
 import CookieBanner from "@/components/CookieBanner";
+import FranceGlobe from "@/components/FranceGlobe";
 import { COOKIE_CONSENT_EVENT, getCookieConsent, openCookiePreferences, type CookieConsent } from "@/lib/cookieConsent";
 
 const AdminAnalytics = lazy(() => import("@/components/AdminAnalytics"));
@@ -361,12 +362,12 @@ function Catalogue() {
 }
 
 function About() {
-  const { t, to, galleryItem } = useI18n();
-  const portrait = siteCache.gallery[4] && galleryItem(siteCache.gallery[4]);
+  const { t, to } = useI18n();
   return (
     <PageIntro eyebrow={t.about.eyebrow} title={rich(t.about.title)} text={t.about.text}>
       <section className="story-grid">
-        <img src={portrait?.image_url} alt={portrait?.alt_text} />
+        {/* Boucle de 3 s (aller-retour, sans coupure visible) */}
+        <video className="story-video" src="/about-photographer.mp4" poster="/about-photographer.jpg" autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
         <div>
           <p className="eyebrow">{t.about.approachEyebrow}</p>
           <h2>{rich(t.about.approachTitle)}</h2>
@@ -384,15 +385,13 @@ function About() {
 
 function LocationPage() {
   const { t, to } = useI18n();
-  const address = import.meta.env.VITE_STUDIO_ADDRESS || t.location.addressFallback;
+  // Une URL ici est une erreur de configuration : on ne l’affiche pas aux visiteurs.
+  const configured = String(import.meta.env.VITE_STUDIO_ADDRESS || "").trim();
+  const address = configured && !/^https?:\/\//i.test(configured) ? configured : t.location.addressFallback;
   return (
     <PageIntro eyebrow={t.location.eyebrow} title={rich(t.location.title)} text={t.location.text}>
       <div className="location-grid">
-        <div className="map-placeholder">
-          <MapPin size={34} />
-          <strong>{address}</strong>
-          <p>{t.location.mapNote}</p>
-        </div>
+        <FranceGlobe label={t.location.mapLabel} caption={address} />
         <div className="location-copy">
           <p className="eyebrow">{t.location.travelEyebrow}</p>
           <h2>{rich(t.location.travelTitle)}</h2>
@@ -1372,7 +1371,9 @@ function LocalizedSite({ lang }: { lang: Lang }) {
 }
 
 export function PublicApp() {
-  const [data, setData] = useState(() => loadLocalContent({ services: seedServices, gallery: seedGallery }));
+  // Le premier rendu doit rester identique au HTML pré-rendu. Le cache navigateur
+  // est appliqué après l’hydratation, puis remplacé par les données Supabase.
+  const [data, setData] = useState({ services: seedServices, gallery: seedGallery });
   const refresh = async () => {
     const remote = await loadPublicContent();
     if (remote) {
@@ -1382,7 +1383,8 @@ export function PublicApp() {
     }
   };
   useEffect(() => {
-    refresh();
+    setData(loadLocalContent({ services: seedServices, gallery: seedGallery }));
+    void refresh();
   }, []);
   useSystemThemeSync();
   siteCache = { ...data, refresh };

@@ -4,6 +4,7 @@ import type { Feature, FeatureCollection, Geometry } from "geojson";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import type { PageView } from "@/lib/analytics";
 import atlasUrl from "world-atlas/countries-110m.json?url";
+import { globePalette, styleGlobeSurface } from "@/lib/globeTheme";
 
 type LocationGroup = {
   kind: "visit";
@@ -141,7 +142,7 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
           .atmosphereAltitude(0.18)
           .globeCurvatureResolution(5)
           .polygonsData(countries)
-          .polygonGeoJsonGeometry((country) => (country as CountryFeature).geometry)
+          .polygonGeoJsonGeometry("geometry")
           .polygonAltitude(0.008)
           .polygonCapCurvatureResolution(4)
           .polygonLabel(countryTooltip)
@@ -189,27 +190,12 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
         const applyPalette = () => {
           if (!globe) return;
           const dark = document.documentElement.dataset.theme === "dark";
-          const accent = dark ? "#c9ad7c" : "#ad9362";
-          const surface = dark ? "#171310" : "#3a3029";
-          const material = globe.globeMaterial() as unknown as {
-            color: { set: (color: string) => void };
-            emissive: { set: (color: string) => void };
-            emissiveIntensity: number;
-            opacity: number;
-            transparent: boolean;
-            shininess?: number;
-          };
-          material.color.set(surface);
-          material.emissive.set(dark ? "#120e0b" : "#1d1712");
-          material.emissiveIntensity = dark ? 0.34 : 0.22;
-          material.opacity = dark ? 0.96 : 0.94;
-          material.transparent = true;
-          if (typeof material.shininess === "number") material.shininess = 12;
+          const { accent, cap, side, stroke } = globePalette(dark);
+          styleGlobeSurface(globe, dark);
           globe
-            .atmosphereColor(accent)
-            .polygonCapColor(() => dark ? "rgba(91, 73, 56, 0.72)" : "rgba(193, 166, 119, 0.58)")
-            .polygonSideColor(() => dark ? "rgba(41, 31, 24, 0.72)" : "rgba(92, 71, 48, 0.46)")
-            .polygonStrokeColor(() => dark ? "rgba(244, 231, 207, 0.62)" : "rgba(255, 249, 237, 0.86)")
+            .polygonCapColor(() => cap)
+            .polygonSideColor(() => side)
+            .polygonStrokeColor(() => stroke)
             .pointColor(() => "#fff3d2")
             .ringColor(() => [accent, "rgba(201,173,124,0)"])
             .arcColor(() => ["rgba(201,173,124,0.08)", accent]);

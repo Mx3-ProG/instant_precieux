@@ -1080,7 +1080,8 @@ em {
   gap: 7vw;
   align-items: center;
 }
-.story-grid > img {
+.story-grid > img,
+.story-grid > .story-video {
   height: 700px;
 }
 .story-grid > div p:not(.eyebrow),
@@ -1848,7 +1849,8 @@ td select {
   .location-grid {
     gap: 3rem;
   }
-  .story-grid > img {
+  .story-grid > img,
+  .story-grid > .story-video {
     height: 560px;
   }
   .contact-grid {
@@ -1993,7 +1995,8 @@ td select {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  .story-grid > img {
+  .story-grid > img,
+  .story-grid > .story-video {
     height: 520px;
   }
   .contact-grid {
@@ -2240,4 +2243,85 @@ td span.appointment-badge.a_replanifier {
 }
 :root[data-theme="dark"] .quote-form ::placeholder {
   color: #9a8f83;
+}
+
+/* À propos : vidéo en boucle à la place du portrait */
+.story-video {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  background: var(--cream);
+}
+
+/* Où nous trouver : globe avec la France illuminée */
+.france-globe {
+  margin: 0;
+  height: 560px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--gold) 14%, transparent), transparent 62%);
+}
+/* En absolu : la zone de dessin WebGL ne peut jamais agrandir la case ni recouvrir le texte. */
+.france-globe-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: drop-shadow(0 24px 30px color-mix(in srgb, var(--ink) 15%, transparent));
+}
+.france-globe-canvas canvas {
+  display: block;
+  outline: none;
+}
+@media (pointer: fine) {
+  .france-globe-canvas {
+    cursor: grab;
+  }
+  .france-globe-canvas:active {
+    cursor: grabbing;
+  }
+}
+.france-globe-fallback {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #5c4b3f, #27221d 70%);
+}
+.france-globe figcaption {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--chip-bg);
+  backdrop-filter: blur(12px);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.france-globe-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #408cff;
+  box-shadow: 0 0 0 4px rgba(64, 140, 255, 0.22);
+}
+@media (max-width: 1000px) {
+  .france-globe {
+    height: 440px;
+  }
+}
+@media (max-width: 700px) {
+  .france-globe {
+    height: min(400px, 100vw);
+  }
 }
