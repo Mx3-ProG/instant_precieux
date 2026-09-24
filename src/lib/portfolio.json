@@ -1,0 +1,1505 @@
+{
+  "profile": {
+    "name": "Amara Okonkwo",
+    "title": {
+      "en": "Photographer & Art Director",
+      "fr": "Photographe & Directrice Artistique",
+      "es": "Fotógrafa y Directora de Arte",
+      "ar": "مصورة ومديرة فنية",
+      "ru": "Фотограф и арт-директор"
+    },
+    "tagline": {
+      "en": "Where earth meets elegance, stories bloom authentically",
+      "fr": "Là où la terre rencontre l'élégance, les histoires éclosent avec authenticité",
+      "es": "Donde la tierra se encuentra con la elegancia, las historias florecen con autenticidad",
+      "ar": "حيث تلتقي الأرض بالأناقة، تتفتح القصص بصدق",
+      "ru": "Там, где земля встречается с элегантностью, истории расцветают искренне"
+    },
+    "bio": {
+      "en": "Amara Okonkwo is a Nigerian-American photographer and art director whose work dissolves the boundaries between fashion, femininity, and the natural world. Based in Portland, Oregon, Amara creates editorial imagery that challenges the extractive nature of commercial fashion by grounding each shoot in environmental reverence and authentic female narratives.",
+      "fr": "Amara Okonkwo est une photographe et directrice artistique nigériane-américaine dont le travail efface les frontières entre la mode, la féminité et le monde naturel. Basée à Portland, dans l'Oregon, Amara crée des images éditoriales qui remettent en question la nature extractive de la mode commerciale en ancrant chaque prise de vue dans un profond respect de l'environnement et des récits féminins authentiques.",
+      "es": "Amara Okonkwo es una fotógrafa y directora de arte nigeriano-estadounidense cuyo trabajo disuelve las fronteras entre la moda, la feminidad y el mundo natural. Radicada en Portland, Oregón, Amara crea imágenes editoriales que cuestionan la naturaleza extractiva de la moda comercial, arraigando cada sesión en el respeto ambiental y en narrativas femeninas auténticas.",
+      "ar": "أمارا أوكونكو مصورة ومديرة فنية أمريكية من أصل نيجيري، يذيب عملها الحدود بين الموضة والأنوثة والعالم الطبيعي. تقيم في بورتلاند، أوريغون، وتبتكر أمارا صورًا تحريرية تتحدى الطابع الاستغلالي للموضة التجارية من خلال ترسيخ كل جلسة تصوير في احترام بيئي وسرديات نسائية أصيلة.",
+      "ru": "Амара Оконкво — нигерийско-американский фотограф и арт-директор, чьи работы стирают границы между модой, женственностью и миром природы. Живя в Портленде, штат Орегон, Амара создаёт редакционные образы, бросающие вызов эксплуататорской природе коммерческой моды, укореняя каждую съёмку в экологическом уважении и подлинных женских историях."
+    },
+    "location": "Portland, OR",
+    "email": "hello@okonkwo.com",
+    "social": {
+      "instagram": "https://instagram.com/okonkwo.photo",
+      "handle": "@okonkwo.photo"
+    },
+    "siteUrl": "https://okonkwo.com",
+    "siteName": "MADAKWO",
+    "copyright": "© 2025 MADAKWO",
+    "about": {
+      "intro": {
+        "en": "Photographer and art director specializing in conscious fashion, environmental portraiture, and feminine narrative photography.",
+        "fr": "Photographe et directrice artistique spécialisée dans la mode consciente, le portrait environnemental et la photographie de récits féminins.",
+        "es": "Fotógrafa y directora de arte especializada en moda consciente, retrato ambiental y fotografía de narrativa femenina.",
+        "ar": "مصورة ومديرة فنية متخصصة في الموضة الواعية، والتصوير البيئي، وتصوير السرديات النسائية.",
+        "ru": "Фотограф и арт-директор, специализирующаяся на осознанной моде, экологическом портрете и фотографии женских историй."
+      },
+      "paragraphs": [
+        {
+          "en": "Amara Okonkwo is a Nigerian-American photographer and art director whose work dissolves the boundaries between fashion, femininity, and the natural world. Based in Portland, Oregon, Amara creates editorial imagery that challenges the extractive nature of commercial fashion by grounding each shoot in environmental reverence and authentic female narratives.",
+          "fr": "Amara Okonkwo est une photographe et directrice artistique nigériane-américaine dont le travail efface les frontières entre la mode, la féminité et le monde naturel. Basée à Portland, dans l'Oregon, Amara crée des images éditoriales qui remettent en question la nature extractive de la mode commerciale en ancrant chaque prise de vue dans un profond respect de l'environnement et des récits féminins authentiques.",
+          "es": "Amara Okonkwo es una fotógrafa y directora de arte nigeriano-estadounidense cuyo trabajo disuelve las fronteras entre la moda, la feminidad y el mundo natural. Radicada en Portland, Oregón, Amara crea imágenes editoriales que cuestionan la naturaleza extractiva de la moda comercial, arraigando cada sesión en el respeto ambiental y en narrativas femeninas auténticas.",
+          "ar": "أمارا أوكونكو مصورة ومديرة فنية أمريكية من أصل نيجيري، يذيب عملها الحدود بين الموضة والأنوثة والعالم الطبيعي. تقيم في بورتلاند، أوريغون، وتبتكر أمارا صورًا تحريرية تتحدى الطابع الاستغلالي للموضة التجارية من خلال ترسيخ كل جلسة تصوير في احترام بيئي وسرديات نسائية أصيلة.",
+          "ru": "Амара Оконкво — нигерийско-американский фотограф и арт-директор, чьи работы стирают границы между модой, женственностью и миром природы. Живя в Портленде, штат Орегон, Амара создаёт редакционные образы, бросающие вызов эксплуататорской природе коммерческой моды, укореняя каждую съёмку в экологическом уважении и подлинных женских историях."
+        },
+        {
+          "en": "Her practice emerged from a pivotal realization: that fashion photography could honor rather than exploit, celebrate rather than objectify. Through collaborations with conscious brands and independent publications, Amara weaves together soft natural light, earth-derived color palettes, and intimate direction to craft visual stories that empower women while advocating for ecological mindfulness.",
+          "fr": "Sa pratique est née d'une prise de conscience décisive : la photographie de mode peut honorer plutôt qu'exploiter, célébrer plutôt qu'objectiver. À travers des collaborations avec des marques conscientes et des publications indépendantes, Amara tisse une lumière naturelle douce, des palettes de couleurs inspirées de la terre et une direction intime pour créer des récits visuels qui donnent du pouvoir aux femmes tout en défendant la conscience écologique.",
+          "es": "Su práctica surgió de una toma de conciencia decisiva: que la fotografía de moda podía honrar en lugar de explotar, celebrar en lugar de cosificar. A través de colaboraciones con marcas conscientes y publicaciones independientes, Amara combina una suave luz natural, paletas de colores inspiradas en la tierra y una dirección íntima para crear relatos visuales que empoderan a las mujeres mientras defienden la conciencia ecológica.",
+          "ar": "نشأت ممارستها من إدراك محوري: أن تصوير الأزياء يمكن أن يكرّم بدلاً من أن يستغل، وأن يحتفي بدلاً من أن يسلّع. من خلال التعاون مع علامات تجارية واعية ومنشورات مستقلة، تمزج أمارا بين الضوء الطبيعي الناعم وألوان مستوحاة من الأرض وإخراج حميمي لصياغة قصص بصرية تمكّن النساء وتدعو في الوقت نفسه إلى الوعي البيئي.",
+          "ru": "Её творческий подход родился из важного осознания: модная фотография может чтить, а не эксплуатировать, воспевать, а не превращать в объект. Сотрудничая с осознанными брендами и независимыми изданиями, Амара сочетает мягкий естественный свет, палитры земляных оттенков и камерную режиссуру, создавая визуальные истории, которые расширяют возможности женщин и продвигают экологическую осознанность."
+        },
+        {
+          "en": "Her work has been featured in publications championing sustainable fashion, and she dedicates a portion of her commercial earnings to reforestation projects and organizations supporting women's environmental leadership.",
+          "fr": "Son travail a été présenté dans des publications défendant la mode durable, et elle consacre une partie de ses revenus commerciaux à des projets de reboisement et à des organisations soutenant le leadership environnemental des femmes.",
+          "es": "Su trabajo se ha publicado en medios que defienden la moda sostenible, y dedica parte de sus ingresos comerciales a proyectos de reforestación y organizaciones que apoyan el liderazgo ambiental femenino.",
+          "ar": "تم عرض أعمالها في منشورات تدافع عن الموضة المستدامة، وهي تخصص جزءًا من أرباحها التجارية لمشاريع إعادة التشجير والمنظمات الداعمة للقيادة النسائية البيئية.",
+          "ru": "Её работы публиковались в изданиях, продвигающих устойчивую моду, и она направляет часть своего коммерческого дохода на проекты по восстановлению лесов и организации, поддерживающие женское экологическое лидерство."
+        }
+      ],
+      "locationDetails": {
+        "en": "Based in Portland, Oregon",
+        "fr": "Basée à Portland, Oregon",
+        "es": "Radicada en Portland, Oregón",
+        "ar": "مقيمة في بورتلاند، أوريغون",
+        "ru": "Живёт в Портленде, штат Орегон"
+      },
+      "workingDetails": {
+        "en": "Working with conscious brands and independent publications worldwide",
+        "fr": "Collabore avec des marques conscientes et des publications indépendantes dans le monde entier",
+        "es": "Colabora con marcas conscientes y publicaciones independientes en todo el mundo",
+        "ar": "تعمل مع علامات تجارية واعية ومنشورات مستقلة حول العالم",
+        "ru": "Сотрудничает с осознанными брендами и независимыми изданиями по всему миру"
+      }
+    },
+    "cv": {
+      "sections": [
+        {
+          "title": {
+            "en": "Selected Clients",
+            "fr": "Clients sélectionnés",
+            "es": "Clientes seleccionados",
+            "ar": "عملاء مختارون",
+            "ru": "Избранные клиенты"
+          },
+          "items": [
+            {
+              "year": "2024",
+              "content": {
+                "en": "Sustainable Fashion Collective",
+                "fr": "Collectif de mode durable",
+                "es": "Colectivo de moda sostenible",
+                "ar": "تجمع الموضة المستدامة",
+                "ru": "Коллектив устойчивой моды"
+              }
+            },
+            {
+              "year": "2024",
+              "content": {
+                "en": "Earth & Elegance Magazine",
+                "fr": "Magazine Earth & Elegance",
+                "es": "Revista Earth & Elegance",
+                "ar": "مجلة Earth & Elegance",
+                "ru": "Журнал Earth & Elegance"
+              }
+            },
+            {
+              "year": "2023",
+              "content": {
+                "en": "Conscious Clothing Co.",
+                "fr": "Conscious Clothing Co.",
+                "es": "Conscious Clothing Co.",
+                "ar": "Conscious Clothing Co.",
+                "ru": "Conscious Clothing Co."
+              }
+            },
+            {
+              "year": "2023",
+              "content": {
+                "en": "Women's Environmental Leadership Initiative",
+                "fr": "Initiative pour le leadership environnemental des femmes",
+                "es": "Iniciativa de Liderazgo Ambiental de la Mujer",
+                "ar": "مبادرة القيادة البيئية النسائية",
+                "ru": "Инициатива женского экологического лидерства"
+              }
+            },
+            {
+              "year": "2022",
+              "content": {
+                "en": "Natural Beauty Campaign",
+                "fr": "Campagne Beauté Naturelle",
+                "es": "Campaña de Belleza Natural",
+                "ar": "حملة الجمال الطبيعي",
+                "ru": "Кампания «Естественная красота»"
+              }
+            }
+          ]
+        },
+        {
+          "title": {
+            "en": "Publications",
+            "fr": "Publications",
+            "es": "Publicaciones",
+            "ar": "المنشورات",
+            "ru": "Публикации"
+          },
+          "items": [
+            {
+              "year": "2024",
+              "content": {
+                "en": "Featured in Sustainable Fashion Magazine",
+                "fr": "Publiée dans Sustainable Fashion Magazine",
+                "es": "Publicada en Sustainable Fashion Magazine",
+                "ar": "نُشرت في مجلة Sustainable Fashion",
+                "ru": "Публикация в Sustainable Fashion Magazine"
+              }
+            },
+            {
+              "year": "2023",
+              "content": {
+                "en": "Environmental Portrait Excellence Award",
+                "fr": "Prix d'excellence du portrait environnemental",
+                "es": "Premio a la Excelencia en Retrato Ambiental",
+                "ar": "جائزة التميز في التصوير البيئي",
+                "ru": "Премия за выдающийся экологический портрет"
+              }
+            }
+          ]
+        },
+        {
+          "title": {
+            "en": "Education & Background",
+            "fr": "Formation & Parcours",
+            "es": "Formación y Trayectoria",
+            "ar": "التعليم والخلفية",
+            "ru": "Образование и опыт"
+          },
+          "items": [
+            {
+              "year": "2015-2020",
+              "content": {
+                "en": "Art Direction & Photography, Portland OR",
+                "fr": "Direction artistique & Photographie, Portland OR",
+                "es": "Dirección de Arte y Fotografía, Portland OR",
+                "ar": "الإخراج الفني والتصوير، بورتلاند أوريغون",
+                "ru": "Арт-дирекшн и фотография, Портленд, Орегон"
+              }
+            },
+            {
+              "year": "2020",
+              "content": {
+                "en": "Sustainable Fashion Photography Certification",
+                "fr": "Certification en photographie de mode durable",
+                "es": "Certificación en Fotografía de Moda Sostenible",
+                "ar": "شهادة في تصوير الموضة المستدامة",
+                "ru": "Сертификат по фотографии устойчивой моды"
+              }
+            }
+          ]
+        },
+        {
+          "title": {
+            "en": "Services",
+            "fr": "Services",
+            "es": "Servicios",
+            "ar": "الخدمات",
+            "ru": "Услуги"
+          },
+          "items": [
+            {
+              "content": {
+                "en": "Conscious Fashion Photography",
+                "fr": "Photographie de mode consciente",
+                "es": "Fotografía de moda consciente",
+                "ar": "تصوير الموضة الواعية",
+                "ru": "Фотография осознанной моды"
+              }
+            },
+            {
+              "content": {
+                "en": "Environmental Portraiture",
+                "fr": "Portrait environnemental",
+                "es": "Retrato ambiental",
+                "ar": "التصوير البيئي",
+                "ru": "Экологический портрет"
+              }
+            },
+            {
+              "content": {
+                "en": "Feminine Narrative Photography",
+                "fr": "Photographie de récits féminins",
+                "es": "Fotografía de narrativa femenina",
+                "ar": "تصوير السرديات النسائية",
+                "ru": "Фотография женских историй"
+              }
+            },
+            {
+              "content": {
+                "en": "Art Direction",
+                "fr": "Direction artistique",
+                "es": "Dirección de arte",
+                "ar": "الإخراج الفني",
+                "ru": "Арт-дирекшн"
+              }
+            },
+            {
+              "content": {
+                "en": "Editorial Photography",
+                "fr": "Photographie éditoriale",
+                "es": "Fotografía editorial",
+                "ar": "التصوير التحريري",
+                "ru": "Редакционная фотография"
+              }
+            },
+            {
+              "content": {
+                "en": "Sustainable Brand Content Creation",
+                "fr": "Création de contenu pour marques durables",
+                "es": "Creación de contenido para marcas sostenibles",
+                "ar": "إنشاء محتوى للعلامات التجارية المستدامة",
+                "ru": "Создание контента для устойчивых брендов"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "projects": [
+    {
+      "slug": "conscious-fashion-1",
+      "title": {
+        "en": "In The Rye",
+        "fr": "Dans le seigle",
+        "es": "En el centeno",
+        "ar": "في حقل الشيلم",
+        "ru": "Во ржи"
+      },
+      "category": "conscious-fashion",
+      "description": {
+        "en": "Stylish models in beige blazers posing in a rural rye field",
+        "fr": "Des mannequins élégants en blazers beige posant dans un champ de seigle",
+        "es": "Modelos elegantes con blazers beige posando en un campo de centeno rural",
+        "ar": "عارضات أزياء أنيقات يرتدين بليزر بيج يتموضعن في حقل شيلم ريفي",
+        "ru": "Стильные модели в бежевых блейзерах позируют в сельском ржаном поле"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10679201.webp",
+        "alt": "Three stylish models posing in a rural field wearing beige blazers, showcasing modern fashion"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10679201.webp",
+          "alt": "Three stylish models posing in a rural field wearing beige blazers, showcasing modern fashion"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679232.webp",
+          "alt": "Three fashionable models wearing beige suits standing in a wheat field under a cloudy sky"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679202.webp",
+          "alt": "A trendy duo poses elegantly in a field, showcasing modern fashion with sunglasses and blazers"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679210.webp",
+          "alt": "Stylish portrait using a mirror outdoors for a conceptual twist"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679212.webp",
+          "alt": "Three models in beige suits pose in a wheat field under a cloudy sky, evoking a serene and artistic ambiance"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679206.webp",
+          "alt": "Three models in beige suits posing confidently in a lush summer wheat field"
+        }
+      ]
+    },
+    {
+      "slug": "conscious-fashion-2",
+      "title": {
+        "en": "Skin Color",
+        "fr": "Couleur de peau",
+        "es": "Color de piel",
+        "ar": "لون البشرة",
+        "ru": "Цвет кожи"
+      },
+      "category": "conscious-fashion",
+      "description": {
+        "en": "Diverse women in serene studio showcasing natural beauty and skin tone diversity",
+        "fr": "Des femmes d'horizons divers dans un studio serein, mettant en valeur la beauté naturelle et la diversité des teints",
+        "es": "Mujeres diversas en un estudio sereno que muestran la belleza natural y la diversidad de tonos de piel",
+        "ar": "نساء متنوعات في استوديو هادئ يبرزن الجمال الطبيعي وتنوع لون البشرة",
+        "ru": "Разные женщины в спокойной студии демонстрируют естественную красоту и разнообразие оттенков кожи"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10212052.webp",
+        "alt": "Two diverse women in a serene studio setting, showcasing natural beauty and diversity"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10212052.webp",
+          "alt": "Two diverse women in a serene studio setting, showcasing natural beauty and diversity"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10212050.webp",
+          "alt": "Elegant studio portrait of two women posing in neutral tone lingerie, showcasing diversity and style"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10212049.webp",
+          "alt": "Two women in a minimalist studio, modeling neutral-toned lingerie and showcasing diversity and style"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10212047.webp",
+          "alt": "Two diverse women posing back to back in a minimalist studio environment"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10212048.webp",
+          "alt": "Studio portrait celebrating natural beauty and skin tone diversity"
+        }
+      ]
+    },
+    {
+      "slug": "conscious-fashion-3",
+      "title": {
+        "en": "French Style",
+        "fr": "Style français",
+        "es": "Estilo francés",
+        "ar": "الطراز الفرنسي",
+        "ru": "Французский стиль"
+      },
+      "category": "conscious-fashion",
+      "description": {
+        "en": "Romantic couple in black and white enjoying bicycle rides through night streets",
+        "fr": "Un couple romantique en noir et blanc profitant de balades à vélo dans les rues nocturnes",
+        "es": "Pareja romántica en blanco y negro disfrutando de paseos en bicicleta por calles nocturnas",
+        "ar": "زوجان رومانسيان بالأبيض والأسود يستمتعان بركوب الدراجات في شوارع الليل",
+        "ru": "Романтичная пара в чёрно-белых тонах катается на велосипеде по ночным улицам"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10071553.webp",
+        "alt": "Black and white portrait of a couple in a romantic nighttime setting, creating a moody atmosphere"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10071553.webp",
+          "alt": "Black and white portrait of a couple in a romantic nighttime setting, creating a moody atmosphere"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10071549.webp",
+          "alt": "Happy couple enjoying a romantic bicycle ride together at night"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10071548.webp",
+          "alt": "A couple enjoys a joyful evening bike ride in a romantic black and white setting"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10071546.webp",
+          "alt": "A couple in stylish attire cycling together on a city street at night"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10071542.webp",
+          "alt": "Romantic black and white photo of a couple embracing at night, showcasing love and intimacy"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10071555.webp",
+          "alt": "A couple sharing a romantic moment on a city street at night"
+        }
+      ]
+    },
+    {
+      "slug": "conscious-fashion-4",
+      "title": {
+        "en": "Pastel Fashion",
+        "fr": "Mode pastel",
+        "es": "Moda pastel",
+        "ar": "أزياء باستيل",
+        "ru": "Пастельная мода"
+      },
+      "category": "conscious-fashion",
+      "description": {
+        "en": "Woman in elegant white suit by serene water with natural beauty aesthetic",
+        "fr": "Une femme en élégant costume blanc près d'une eau paisible, à l'esthétique naturelle",
+        "es": "Mujer con elegante traje blanco junto a un agua serena, con una estética de belleza natural",
+        "ar": "امرأة ترتدي بدلة بيضاء أنيقة بجانب مياه هادئة بجمالية طبيعية",
+        "ru": "Женщина в элегантном белом костюме у спокойной воды с эстетикой естественной красоты"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/9836623.webp",
+        "alt": "Elegant portrait of a fashionable woman in a white suit with afro braids by a serene water backdrop"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/9836623.webp",
+          "alt": "Elegant portrait of a fashionable woman in a white suit with afro braids by a serene water backdrop"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836619.webp",
+          "alt": "Stylish woman with long braids in a white coat standing by a serene lake"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836621.webp",
+          "alt": "Profile of a stylish woman with afro braids in a natural outdoor setting"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836613.webp",
+          "alt": "A fashionable woman in a white suit enjoys a peaceful moment by a tranquil lake"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836627.webp",
+          "alt": "Stylish woman with braided hair in a white suit posing by a serene lake outdoors"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836616.webp",
+          "alt": "A captivating portrait of a woman with braided hair standing against a serene seaside backdrop"
+        }
+      ]
+    },
+    {
+      "slug": "conscious-fashion-5",
+      "title": {
+        "en": "Colorful Walk",
+        "fr": "Balade colorée",
+        "es": "Paseo colorido",
+        "ar": "نزهة ملونة",
+        "ru": "Цветная прогулка"
+      },
+      "category": "conscious-fashion",
+      "description": {
+        "en": "Models in vibrant colorful blazer jackets showcasing bold modern fashion",
+        "fr": "Des mannequins en blazers aux couleurs vives, illustrant une mode moderne et audacieuse",
+        "es": "Modelos con blazers de colores vibrantes que muestran una moda moderna y audaz",
+        "ar": "عارضات أزياء يرتدين سترات بليزر زاهية الألوان يبرزن الموضة العصرية الجريئة",
+        "ru": "Модели в ярких цветных блейзерах демонстрируют смелую современную моду"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10669638.webp",
+        "alt": "Stylish fashion photography featuring two models with ponytails in colorful blazer jackets"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10669638.webp",
+          "alt": "Stylish fashion photography featuring two models with ponytails in colorful blazer jackets"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10669676.webp",
+          "alt": "Stylish portrait of two Asian women in vividly colored blazers, showcasing modern fashion"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10669643.webp",
+          "alt": "Two fashionable women in pink and blue outfits standing outdoors with a pink backdrop, showcasing modern style and diversity"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10669645.webp",
+          "alt": "A stylish woman in a striking pink suit poses with a backdrop under natural light"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10669646.webp",
+          "alt": "Two women in bright blazers facing a textured wall"
+        }
+      ]
+    },
+    {
+      "slug": "environmental-portraiture-1",
+      "title": {
+        "en": "Hippie",
+        "fr": "Hippie",
+        "es": "Hippie",
+        "ar": "هيبي",
+        "ru": "Хиппи"
+      },
+      "category": "environmental-portraiture",
+      "description": {
+        "en": "Bohemian style couple in vibrant colors embracing nature's meadows",
+        "fr": "Un couple au style bohème, en couleurs vives, enlacé dans des prairies naturelles",
+        "es": "Pareja de estilo bohemio en colores vivos abrazando los prados de la naturaleza",
+        "ar": "زوجان بأسلوب بوهيمي بألوان زاهية يحتضنان مروج الطبيعة",
+        "ru": "Пара в богемном стиле в ярких цветах среди природных лугов"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10676043.webp",
+        "alt": "Person with afro hairstyle wearing a vibrant sweater poses thoughtfully against a soft sky backdrop"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10676043.webp",
+          "alt": "Person with afro hairstyle wearing a vibrant sweater poses thoughtfully against a soft sky backdrop"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10675995.webp",
+          "alt": "Young couple in colorful bohemian style clothing embracing in a rural meadow"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10676001.webp",
+          "alt": "Couple in bohemian attire dancing in sunlit field"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10675993.webp",
+          "alt": "Person in colorful hippie-style outfit with nature backdrop"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10676010.webp",
+          "alt": "Vibrant bohemian fashion in natural outdoor setting"
+        }
+      ]
+    },
+    {
+      "slug": "environmental-portraiture-2",
+      "title": {
+        "en": "Modern Gypsies",
+        "fr": "Gitans modernes",
+        "es": "Gitanos modernos",
+        "ar": "غجر عصريون",
+        "ru": "Современные цыгане"
+      },
+      "category": "environmental-portraiture",
+      "description": {
+        "en": "Bohemian couple in unique outfits exploring serene countryside fields",
+        "fr": "Un couple bohème aux tenues singulières explorant de paisibles champs de campagne",
+        "es": "Pareja bohemia con atuendos únicos explorando serenos campos rurales",
+        "ar": "زوجان بوهيميان بأزياء فريدة يستكشفان حقول الريف الهادئة",
+        "ru": "Богемная пара в необычных нарядах исследует спокойные сельские поля"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10667870.webp",
+        "alt": "Young bohemian couple in unique outfits holding hands in a serene open field"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10667870.webp",
+          "alt": "Young bohemian couple in unique outfits holding hands in a serene open field"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10667863.webp",
+          "alt": "A bohemian couple holding hands in a peaceful countryside setting with a cloudy sky"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10667857.webp",
+          "alt": "Couple in bohemian style walking through grass field"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10667869.webp",
+          "alt": "Romantic couple in countryside with natural environment"
+        }
+      ]
+    },
+    {
+      "slug": "environmental-portraiture-3",
+      "title": {
+        "en": "Dance in the Field",
+        "fr": "Danse dans les champs",
+        "es": "Danza en el campo",
+        "ar": "رقصة في الحقل",
+        "ru": "Танец в поле"
+      },
+      "category": "environmental-portraiture",
+      "description": {
+        "en": "Women gracefully dancing in sunlit meadows during golden hour",
+        "fr": "Des femmes dansant avec grâce dans des prairies ensoleillées à l'heure dorée",
+        "es": "Mujeres bailando con gracia en prados soleados durante la hora dorada",
+        "ar": "نساء يرقصن برشاقة في مروج مشمسة خلال الساعة الذهبية",
+        "ru": "Женщины изящно танцуют на залитых солнцем лугах в час золотого света"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10570884.webp",
+        "alt": "A group of women engaging in a graceful dance in a sunlit grass field during sunset"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10570884.webp",
+          "alt": "A group of women engaging in a graceful dance in a sunlit grass field during sunset"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10570883.webp",
+          "alt": "Three women gracefully dancing in a rural meadow as the sun sets behind them"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10570877.webp",
+          "alt": "Women in flowing dresses dancing in golden hour light"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10570878.webp",
+          "alt": "Graceful movement in natural field setting at sunset"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10570879.webp",
+          "alt": "Dance performance in outdoor meadow with warm lighting"
+        }
+      ]
+    },
+    {
+      "slug": "environmental-portraiture-4",
+      "title": {
+        "en": "Equal",
+        "fr": "Égaux",
+        "es": "Iguales",
+        "ar": "متساوون",
+        "ru": "Равные"
+      },
+      "category": "environmental-portraiture",
+      "description": {
+        "en": "Diverse group in white attire symbolizing unity and equality",
+        "fr": "Un groupe diversifié en tenue blanche symbolisant l'unité et l'égalité",
+        "es": "Grupo diverso vestido de blanco simbolizando unidad e igualdad",
+        "ar": "مجموعة متنوعة بزي أبيض ترمز إلى الوحدة والمساواة",
+        "ru": "Разнообразная группа в белых нарядах символизирует единство и равенство"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10622514.webp",
+        "alt": "A diverse group in white suits face each other in an industrial setting, symbolizing equality"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10622514.webp",
+          "alt": "A diverse group in white suits face each other in an industrial setting, symbolizing equality"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622542.webp",
+          "alt": "Diverse group walking inside an industrial building wearing white outfits, symbolizing unity and equality"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622537.webp",
+          "alt": "People in white attire representing equality and unity"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622533.webp",
+          "alt": "Diverse individuals in unified white clothing"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622540.webp",
+          "alt": "Group portrait celebrating equality and diversity"
+        }
+      ]
+    },
+    {
+      "slug": "environmental-portraiture-5",
+      "title": {
+        "en": "In The Rye",
+        "fr": "Dans le seigle",
+        "es": "En el centeno",
+        "ar": "في حقل الشيلم",
+        "ru": "Во ржи"
+      },
+      "category": "environmental-portraiture",
+      "description": {
+        "en": "Stylish models in beige blazers posing in rural rye fields",
+        "fr": "Des mannequins élégants en blazers beige posant dans des champs de seigle",
+        "es": "Modelos elegantes con blazers beige posando en campos de centeno rurales",
+        "ar": "عارضات أزياء أنيقات يرتدين بليزر بيج يتموضعن في حقول شيلم ريفية",
+        "ru": "Стильные модели в бежевых блейзерах позируют в сельских ржаных полях"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10679203.webp",
+        "alt": "Models in natural setting with beige blazers in rural field"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10679203.webp",
+          "alt": "Models in natural setting with beige blazers in rural field"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679208.webp",
+          "alt": "Fashion models posing elegantly in wheat field"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679207.webp",
+          "alt": "Rural outdoor fashion photography in natural environment"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679209.webp",
+          "alt": "Beige blazer fashion in rye field setting"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679211.webp",
+          "alt": "Outdoor fashion models in natural countryside"
+        }
+      ]
+    },
+    {
+      "slug": "feminine-narrative-1",
+      "title": {
+        "en": "Ballet",
+        "fr": "Ballet",
+        "es": "Ballet",
+        "ar": "الباليه",
+        "ru": "Балет"
+      },
+      "category": "feminine-narrative",
+      "description": {
+        "en": "Ballet dancers practicing elegant poses in a dance studio",
+        "fr": "Des danseuses de ballet répétant des poses élégantes dans un studio de danse",
+        "es": "Bailarinas de ballet practicando poses elegantes en un estudio de danza",
+        "ar": "راقصات باليه يتدربن على أوضاع أنيقة في استوديو رقص",
+        "ru": "Балерины отрабатывают изящные позы в танцевальной студии"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10640597.webp",
+        "alt": "Three ballet dancers practicing poses in a dance studio, showcasing elegance and flexibility"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10640597.webp",
+          "alt": "Three ballet dancers practicing poses in a dance studio, showcasing elegance and flexibility"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10640582.webp",
+          "alt": "Three ballet dancers in elegant poses inside a softly lit dance studio, showcasing poise and flexibility"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10640594.webp",
+          "alt": "Ballet dancers in graceful formation during practice"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10640584.webp",
+          "alt": "Elegant ballet poses in natural studio lighting"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10640586.webp",
+          "alt": "Ballet dancers showcasing grace and movement"
+        }
+      ]
+    },
+    {
+      "slug": "feminine-narrative-2",
+      "title": {
+        "en": "Loss",
+        "fr": "Perte",
+        "es": "Pérdida",
+        "ar": "الفقدان",
+        "ru": "Утрата"
+      },
+      "category": "feminine-narrative",
+      "description": {
+        "en": "Intimate portraits exploring themes of contemplation and emotion",
+        "fr": "Des portraits intimes explorant les thèmes de la contemplation et de l'émotion",
+        "es": "Retratos íntimos que exploran temas de contemplación y emoción",
+        "ar": "صور شخصية حميمة تستكشف موضوعات التأمل والعاطفة",
+        "ru": "Интимные портреты, исследующие темы созерцания и эмоций"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10496653.webp",
+        "alt": "A woman in black sits on the floor, deep in thought, with two other people in the room"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10496653.webp",
+          "alt": "A woman in black sits on the floor, deep in thought, with two other people in the room"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10496652.webp",
+          "alt": "Woman in a black dress sitting on the floor in a contemplative pose beside a yellow couch"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10496658.webp",
+          "alt": "Woman in contemplative moment with emotional depth"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10496654.webp",
+          "alt": "Intimate portrait capturing quiet emotion"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10496656.webp",
+          "alt": "Emotional portrait with thoughtful atmosphere"
+        }
+      ]
+    },
+    {
+      "slug": "feminine-narrative-3",
+      "title": {
+        "en": "Pop America 90",
+        "fr": "Pop America 90",
+        "es": "Pop America 90",
+        "ar": "بوب أمريكا 90",
+        "ru": "Поп-Америка 90"
+      },
+      "category": "feminine-narrative",
+      "description": {
+        "en": "Diverse young women celebrating friendship in vibrant bedroom setting",
+        "fr": "De jeunes femmes d'horizons divers célébrant l'amitié dans une chambre aux couleurs vives",
+        "es": "Jóvenes diversas celebrando la amistad en un dormitorio de colores vibrantes",
+        "ar": "شابات متنوعات يحتفلن بالصداقة في غرفة نوم زاهية الألوان",
+        "ru": "Разные молодые женщины отмечают дружбу в яркой спальне"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10610417.webp",
+        "alt": "Three young women sitting together on a bed, showcasing diversity and friendship"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10610417.webp",
+          "alt": "Three young women sitting together on a bed, showcasing diversity and friendship"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10610414.webp",
+          "alt": "Three young women sitting together in a modern, vibrant bedroom setting, celebrating diversity"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10610407.webp",
+          "alt": "Diverse women in colorful 90s-inspired setting"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10610413.webp",
+          "alt": "Friendship and diversity in vibrant interior"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10610415.webp",
+          "alt": "Young women celebrating connection and sisterhood"
+        }
+      ]
+    },
+    {
+      "slug": "feminine-narrative-4",
+      "title": {
+        "en": "Skin Color",
+        "fr": "Couleur de peau",
+        "es": "Color de piel",
+        "ar": "لون البشرة",
+        "ru": "Цвет кожи"
+      },
+      "category": "feminine-narrative",
+      "description": {
+        "en": "Diverse women in serene studio celebrating natural beauty and diversity",
+        "fr": "Des femmes d'horizons divers dans un studio serein, célébrant la beauté naturelle et la diversité",
+        "es": "Mujeres diversas en un estudio sereno celebrando la belleza natural y la diversidad",
+        "ar": "نساء متنوعات في استوديو هادئ يحتفين بالجمال الطبيعي والتنوع",
+        "ru": "Разные женщины в спокойной студии отмечают естественную красоту и разнообразие"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10212048.webp",
+        "alt": "Two diverse women in elegant studio portrait celebrating natural beauty"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10212048.webp",
+          "alt": "Two diverse women in elegant studio portrait celebrating natural beauty"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10212047.webp",
+          "alt": "Two diverse women posing back to back in a minimalist studio environment"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10212049.webp",
+          "alt": "Two women in a minimalist studio, modeling neutral-toned lingerie and showcasing diversity and style"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10212050.webp",
+          "alt": "Elegant studio portrait of two women posing in neutral tone lingerie, showcasing diversity and style"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10212052.webp",
+          "alt": "Two diverse women in a serene studio setting, showcasing natural beauty and diversity"
+        }
+      ]
+    },
+    {
+      "slug": "feminine-narrative-5",
+      "title": {
+        "en": "Pastel Fashion",
+        "fr": "Mode pastel",
+        "es": "Moda pastel",
+        "ar": "أزياء باستيل",
+        "ru": "Пастельная мода"
+      },
+      "category": "feminine-narrative",
+      "description": {
+        "en": "Woman in elegant white suit by serene water with natural beauty aesthetic",
+        "fr": "Une femme en élégant costume blanc près d'une eau paisible, à l'esthétique naturelle",
+        "es": "Mujer con elegante traje blanco junto a un agua serena, con una estética de belleza natural",
+        "ar": "امرأة ترتدي بدلة بيضاء أنيقة بجانب مياه هادئة بجمالية طبيعية",
+        "ru": "Женщина в элегантном белом костюме у спокойной воды с эстетикой естественной красоты"
+      },
+      "client": "Cottonbro Studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/9836616.webp",
+        "alt": "A captivating portrait of a woman with braided hair standing against a serene seaside backdrop"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/9836616.webp",
+          "alt": "A captivating portrait of a woman with braided hair standing against a serene seaside backdrop"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836627.webp",
+          "alt": "Stylish woman with braided hair in a white suit posing by a serene lake outdoors"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836613.webp",
+          "alt": "A fashionable woman in a white suit enjoys a peaceful moment by a tranquil lake"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836621.webp",
+          "alt": "Profile of a stylish woman with afro braids in a natural outdoor setting"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836619.webp",
+          "alt": "Stylish woman with long braids in a white coat standing by a serene lake"
+        }
+      ]
+    },
+    {
+      "slug": "in-the-rye-photos",
+      "title": {
+        "en": "In The Rye - Photos",
+        "fr": "Dans le seigle - Photos",
+        "es": "En el centeno - Fotos",
+        "ar": "في حقل الشيلم - صور",
+        "ru": "Во ржи - Фото"
+      },
+      "category": "environmental-portraiture",
+      "description": {
+        "en": "Behind-the-scenes glimpses into film production and creative storytelling",
+        "fr": "Aperçus des coulisses de la production cinématographique et de la narration créative",
+        "es": "Vistazos entre bastidores de la producción cinematográfica y la narración creativa",
+        "ar": "لمحات من كواليس الإنتاج السينمائي والسرد الإبداعي",
+        "ru": "Закулисные кадры кинопроизводства и творческого повествования"
+      },
+      "client": "Pexels / cottonbro studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/9834546.webp",
+        "alt": "Behind-the-scenes film production and creative storytelling"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/9834546.webp",
+          "alt": "Photo 9834546 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9834550.webp",
+          "alt": "Photo 9834550 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9834554.webp",
+          "alt": "Photo 9834554 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9834873.webp",
+          "alt": "Photo 9834873 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9834877.webp",
+          "alt": "Photo 9834877 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9834883.webp",
+          "alt": "Photo 9834883 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9834924.webp",
+          "alt": "Photo 9834924 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9834928.webp",
+          "alt": "Photo 9834928 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836453.webp",
+          "alt": "Photo 9836453 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836457.webp",
+          "alt": "Photo 9836457 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836517.webp",
+          "alt": "Photo 9836517 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836580.webp",
+          "alt": "Photo 9836580 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836608.webp",
+          "alt": "Photo 9836608 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836617.webp",
+          "alt": "Photo 9836617 from In The Rye - Photos"
+        },
+        {
+          "src": "/src/assets/portfolio-images/9836623.webp",
+          "alt": "Photo 9836623 from In The Rye - Photos"
+        }
+      ]
+    },
+    {
+      "slug": "in-the-rye-videos",
+      "title": {
+        "en": "In The Rye - Videos",
+        "fr": "Dans le seigle - Vidéos",
+        "es": "En el centeno - Vídeos",
+        "ar": "في حقل الشيلم - فيديوهات",
+        "ru": "Во ржи - Видео"
+      },
+      "category": "feminine-narrative",
+      "description": {
+        "en": "Curated video collection from the In The Rye series by cottonbro studio",
+        "fr": "Une sélection de vidéos issues de la série « Dans le seigle » par cottonbro studio",
+        "es": "Una selección de vídeos de la serie «En el centeno» por cottonbro studio",
+        "ar": "مجموعة فيديوهات مختارة من سلسلة «في حقل الشيلم» بواسطة استوديو cottonbro",
+        "ru": "Подборка видео из серии «Во ржи» от cottonbro studio"
+      },
+      "client": "Pexels / cottonbro studio",
+      "year": "2024",
+      "role": "Videography",
+      "videos": [
+        {
+          "videoUrl": "/videos/10677316.mp4",
+          "posterUrl": "/video-posters/10677316.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677317.mp4",
+          "posterUrl": "/video-posters/10677317.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677318.mp4",
+          "posterUrl": "/video-posters/10677318.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677319.mp4",
+          "posterUrl": "/video-posters/10677319.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677320.mp4",
+          "posterUrl": "/video-posters/10677320.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677321.mp4",
+          "posterUrl": "/video-posters/10677321.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677322.mp4",
+          "posterUrl": "/video-posters/10677322.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677382.mp4",
+          "posterUrl": "/video-posters/10677382.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677452.mp4",
+          "posterUrl": "/video-posters/10677452.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677453.mp4",
+          "posterUrl": "/video-posters/10677453.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677455.mp4",
+          "posterUrl": "/video-posters/10677455.webp",
+          "alt": "Video from In The Rye collection"
+        },
+        {
+          "videoUrl": "/videos/10677456.mp4",
+          "posterUrl": "/video-posters/10677456.webp",
+          "alt": "Video from In The Rye collection"
+        }
+      ],
+      "coverImage": {
+        "src": "https://images.pexels.com/videos/10677316/free-video-10677316.jpg",
+        "alt": "Video still from In The Rye collection"
+      },
+      "images": []
+    },
+    {
+      "slug": "same-as-you-photos",
+      "title": {
+        "en": "Same As You",
+        "fr": "Comme toi",
+        "es": "Igual que tú",
+        "ar": "مثلك تمامًا",
+        "ru": "Такой же, как ты"
+      },
+      "category": "environmental-portraiture",
+      "description": {
+        "en": "Portraits exploring themes of equality and human connection",
+        "fr": "Des portraits explorant les thèmes de l'égalité et du lien humain",
+        "es": "Retratos que exploran temas de igualdad y conexión humana",
+        "ar": "صور شخصية تستكشف موضوعات المساواة والتواصل الإنساني",
+        "ru": "Портреты, исследующие темы равенства и человеческой связи"
+      },
+      "client": "Pexels / cottonbro studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10622514.webp",
+        "alt": "Diverse group in white suits representing equality and unity"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10622512.webp",
+          "alt": "Photo 10622512 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622514.webp",
+          "alt": "Photo 10622514 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622515.webp",
+          "alt": "Photo 10622515 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622516.webp",
+          "alt": "Photo 10622516 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622517.webp",
+          "alt": "Photo 10622517 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622518.webp",
+          "alt": "Photo 10622518 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622532.webp",
+          "alt": "Photo 10622532 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622533.webp",
+          "alt": "Photo 10622533 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622537.webp",
+          "alt": "Photo 10622537 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622538.webp",
+          "alt": "Photo 10622538 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622540.webp",
+          "alt": "Photo 10622540 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622543.webp",
+          "alt": "Photo 10622543 from Same As You"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10622550.webp",
+          "alt": "Photo 10622550 from Same As You"
+        }
+      ]
+    },
+    {
+      "slug": "same-as-you-videos",
+      "title": {
+        "en": "Same As You - Videos",
+        "fr": "Comme toi - Vidéos",
+        "es": "Igual que tú - Vídeos",
+        "ar": "مثلك تمامًا - فيديوهات",
+        "ru": "Такой же, как ты - Видео"
+      },
+      "category": "environmental-portraiture",
+      "description": {
+        "en": "Video narratives exploring equality and shared humanity",
+        "fr": "Des récits vidéo explorant l'égalité et l'humanité partagée",
+        "es": "Narrativas en vídeo que exploran la igualdad y la humanidad compartida",
+        "ar": "روايات مصورة تستكشف المساواة والإنسانية المشتركة",
+        "ru": "Видеоистории об равенстве и общей человечности"
+      },
+      "client": "Pexels / cottonbro studio",
+      "year": "2024",
+      "role": "Videography",
+      "videos": [
+        {
+          "videoUrl": "/videos/10617738.mp4",
+          "posterUrl": "/video-posters/10617738.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10617741.mp4",
+          "posterUrl": "/video-posters/10617741.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10617744.mp4",
+          "posterUrl": "/video-posters/10617744.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10619336.mp4",
+          "posterUrl": "/video-posters/10619336.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10619340.mp4",
+          "posterUrl": "/video-posters/10619340.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10620151.mp4",
+          "posterUrl": "/video-posters/10620151.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10620154.mp4",
+          "posterUrl": "/video-posters/10620154.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10621787.mp4",
+          "posterUrl": "/video-posters/10621787.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10621792.mp4",
+          "posterUrl": "/video-posters/10621792.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10621798.mp4",
+          "posterUrl": "/video-posters/10621798.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10622407.mp4",
+          "posterUrl": "/video-posters/10622407.webp",
+          "alt": "Video from Same As You collection"
+        },
+        {
+          "videoUrl": "/videos/10622415.mp4",
+          "posterUrl": "/video-posters/10622415.webp",
+          "alt": "Video from Same As You collection"
+        }
+      ],
+      "coverImage": {
+        "src": "https://images.pexels.com/videos/10617738/free-video-10617738.jpg",
+        "alt": "Video still from Same As You collection"
+      },
+      "images": []
+    },
+    {
+      "slug": "behind-the-lens-photos",
+      "title": {
+        "en": "Behind The Lens",
+        "fr": "Derrière l'objectif",
+        "es": "Detrás del objetivo",
+        "ar": "خلف العدسة",
+        "ru": "За кадром"
+      },
+      "category": "conscious-fashion",
+      "description": {
+        "en": "Elegant fashion photography with warm beige tones and natural aesthetics",
+        "fr": "Une photographie de mode élégante aux tons beige chaleureux et à l'esthétique naturelle",
+        "es": "Fotografía de moda elegante con tonos beige cálidos y estética natural",
+        "ar": "تصوير أزياء أنيق بدرجات بيج دافئة وجمالية طبيعية",
+        "ru": "Элегантная модная фотография в тёплых бежевых тонах с естественной эстетикой"
+      },
+      "client": "Pexels / cottonbro studio",
+      "year": "2024",
+      "role": "Photography",
+      "coverImage": {
+        "src": "/src/assets/portfolio-images/10679232.webp",
+        "alt": "Fashion photography with warm beige tones and natural aesthetics"
+      },
+      "images": [
+        {
+          "src": "/src/assets/portfolio-images/10679087.webp",
+          "alt": "Photo 10679087 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679093.webp",
+          "alt": "Photo 10679093 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679097.webp",
+          "alt": "Photo 10679097 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679100.webp",
+          "alt": "Photo 10679100 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679112.webp",
+          "alt": "Photo 10679112 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679115.webp",
+          "alt": "Photo 10679115 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679143.webp",
+          "alt": "Photo 10679143 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679160.webp",
+          "alt": "Photo 10679160 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679165.webp",
+          "alt": "Photo 10679165 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679180.webp",
+          "alt": "Photo 10679180 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679195.webp",
+          "alt": "Photo 10679195 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679201.webp",
+          "alt": "Photo 10679201 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679207.webp",
+          "alt": "Photo 10679207 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679211.webp",
+          "alt": "Photo 10679211 from Behind The Lens"
+        },
+        {
+          "src": "/src/assets/portfolio-images/10679232.webp",
+          "alt": "Photo 10679232 from Behind The Lens"
+        }
+      ]
+    },
+    {
+      "slug": "behind-the-lens-videos",
+      "title": {
+        "en": "Behind The Lens - Videos",
+        "fr": "Derrière l'objectif - Vidéos",
+        "es": "Detrás del objetivo - Vídeos",
+        "ar": "خلف العدسة - فيديوهات",
+        "ru": "За кадром - Видео"
+      },
+      "category": "conscious-fashion",
+      "description": {
+        "en": "Video documentation of filmmaking and creative production",
+        "fr": "Une documentation vidéo du tournage et de la production créative",
+        "es": "Documentación en vídeo del rodaje y la producción creativa",
+        "ar": "توثيق مصور لصناعة الأفلام والإنتاج الإبداعي",
+        "ru": "Видеодокументация кинопроизводства и творческого процесса"
+      },
+      "client": "Pexels / cottonbro studio",
+      "year": "2024",
+      "role": "Videography",
+      "videos": [
+        {
+          "videoUrl": "/videos/9834405.mp4",
+          "posterUrl": "/video-posters/9834405.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9834409.mp4",
+          "posterUrl": "/video-posters/9834409.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9834415.mp4",
+          "posterUrl": "/video-posters/9834415.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9834570.mp4",
+          "posterUrl": "/video-posters/9834570.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9834572.mp4",
+          "posterUrl": "/video-posters/9834572.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9834894.mp4",
+          "posterUrl": "/video-posters/9834894.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9834898.mp4",
+          "posterUrl": "/video-posters/9834898.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9834942.mp4",
+          "posterUrl": "/video-posters/9834942.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9836485.mp4",
+          "posterUrl": "/video-posters/9836485.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9836546.mp4",
+          "posterUrl": "/video-posters/9836546.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9836598.mp4",
+          "posterUrl": "/video-posters/9836598.webp",
+          "alt": "Video from Behind The Lens collection"
+        },
+        {
+          "videoUrl": "/videos/9836640.mp4",
+          "posterUrl": "/video-posters/9836640.webp",
+          "alt": "Video from Behind The Lens collection"
+        }
+      ],
+      "coverImage": {
+        "src": "https://images.pexels.com/videos/9836640/free-video-9836640.jpg",
+        "alt": "Video still from Behind The Lens collection"
+      },
+      "images": []
+    }
+  ]
+}
