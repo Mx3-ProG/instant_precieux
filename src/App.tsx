@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { categories, gallery as seedGallery, services as seedServices, type GalleryItem, type Service } from "@/content";
 import { appointmentAction, deleteGalleryImage, deleteRow, hasSupabase, loadPublicContent, loadQuotes, saveRow, signInAdmin, supabase, updateQuoteStatus, uploadGalleryImage } from "@/lib/supabase";
+import { defaultAppointmentSlot, minimumAppointmentSlot } from "@/lib/appointments";
 import { loadPageViews, trackPageView, type PageView } from "@/lib/analytics";
 import { loadLocalContent, saveLocalGallery, saveLocalServices } from "@/lib/localContent";
 import SeoManager from "@/components/SeoManager";
@@ -1184,14 +1185,6 @@ function AdminDashboard() {
 const APPOINTMENT_LABELS = { proposee: "Date proposée", confirmee: "Confirmé", a_replanifier: "Autre date demandée" } as const;
 const formatAppointment = (iso: string) =>
   new Date(iso).toLocaleString("fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" });
-/** Valeur par défaut du champ datetime-local : date souhaitée par le client à 10 h, sinon dans une semaine. */
-function defaultSlot(q: Quote) {
-  const base = q.appointment_at ? new Date(q.appointment_at) : q.preferred_date ? new Date(`${q.preferred_date}T10:00`) : new Date(Date.now() + 7 * 86400000);
-  if (!q.appointment_at && !q.preferred_date) base.setHours(10, 0, 0, 0);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${base.getFullYear()}-${pad(base.getMonth() + 1)}-${pad(base.getDate())}T${pad(base.getHours())}:${pad(base.getMinutes())}`;
-}
-
 function AppointmentModal({ quote, onClose, onSaved }: { quote: Quote; onClose: () => void; onSaved: (patch: Partial<Quote>) => void }) {
   const [mode, setMode] = useState<"propose" | "refuse">("propose");
   const [loading, setLoading] = useState(false);
@@ -1237,7 +1230,7 @@ function AppointmentModal({ quote, onClose, onSaved }: { quote: Quote; onClose: 
         )}
         {mode === "propose" ? (
           <div className="modal-fields">
-            <label>Date et heure<input name="appointment_at" type="datetime-local" required defaultValue={defaultSlot(quote)} /></label>
+            <label>Date et heure<input name="appointment_at" type="datetime-local" required min={minimumAppointmentSlot()} defaultValue={defaultAppointmentSlot(quote)} /></label>
             <label>
               Durée
               <select name="duration" defaultValue={String(quote.appointment_duration || 90)}>

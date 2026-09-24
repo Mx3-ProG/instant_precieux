@@ -2,6 +2,14 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import type { AppointmentInfo, QuoteInfo } from "./emails.js";
 
+type EmailResult = { error?: unknown };
+
+/** Exécute un lot d'emails et signale explicitement tout refus de Resend. */
+export async function sendEmails(sends: Array<() => Promise<EmailResult>>) {
+  const results = await Promise.all(sends.map((send) => send()));
+  return results.every((result) => !result.error);
+}
+
 export function serverConfig() {
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SECRET_KEY;

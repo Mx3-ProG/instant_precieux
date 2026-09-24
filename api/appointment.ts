@@ -10,7 +10,7 @@ import {
   clientRequestDeclined,
   clientRescheduleReceived,
 } from "./_lib/emails.js";
-import { appointmentOf, isAdmin, loadQuote, serverConfig } from "./_lib/server.js";
+import { appointmentOf, isAdmin, loadQuote, sendEmails, serverConfig } from "./_lib/server.js";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const LANG_PREFIX = { fr: "", en: "/en", es: "/es", de: "/de" } as const;
@@ -53,28 +53,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const current = loaded.row.appointment_status;
 
     if (body.action === "confirm") {
-      if (current === "confirmee") return res.status(200).json({ ok: true, status: current });
-      if (current !== "proposee") return res.status(409).json({ error: "Ce rendez-vous n'est plus disponible" });
+      if (current !== "proposee" && current !== "confirmee") return res.status(409).json({ error: "Ce rendez-vous n'est plus disponible" });
       if (new Date(appt.at).getTime() < Date.now()) return res.status(409).json({ error: "Ce créneau est passé" });
-      const { error } = await supabase.from("quote_requests").update({ appointment_status: "confirmee", appointment_responded_at: new Date().toISOString(), client_response: null }).eq("id", q.id);
-      if (error) return res.status(500).json({ error: "Mise à jour impossible" });
+      if (current === "proposee") {
+        const { error } = await supabase.from("quote_requests").update({ appointment_status: "confirmee", appointment_responded_at: new Date().toISOString(), client_response: null }).eq("id", q.id);
+        if (error) return res.status(500).json({ error: "Mise à jour impossible" });
+      }
       const ics = (forAdmin: boolean) => [{ filename: "seance-linstant-precieux.ics", content: Buffer.from(appointmentIcs(q, appt, adminEmail, forAdmin)).toString("base64"), contentType: "text/calendar; charset=utf-8" }];
       const key = `${q.id}-${appt.at}`;
-      await Promise.all([
-        resend.emails.send({ from, to: q.email, replyTo: adminEmail, ...clientAppointmentConfirmed(q, appt, siteUrl), attachments: ics(false) }, { headers: { "Idempotency-Key": `appt-confirmed-client-${key}` } }),
-        resend.emails.send({ from, to: adminEmail, replyTo: q.email, ...adminAppointmentConfirmed(q, appt, siteUrl), attachments: ics(true) }, { headers: { "Idempotency-Key": `appt-confirmed-admin-${key}` } }),
+      const sent = await sendEmails([
+        () => resend.emails.send({ from, to: q.email, replyTo: adminEmail, ...clientAppointmentConfirmed(q, appt, siteUrl), attachments: ics(false) }, { headers: { "Idempotency-Key": `appt-confirmed-client-${key}` } }),
+        () => resend.emails.send({ from, to: adminEmail, replyTo: q.email, ...adminAppointmentConfirmed(q, appt, siteUrl), attachments: ics(true) }, { headers: { "Idempotency-Key": `appt-confirmed-admin-${key}` } }),
       ]);
+      if (!sent) return res.status(502).json({ error: "Rendez-vous confirmé, email non envoyé" });
       return res.status(200).json({ ok: true, status: "confirmee" });
     }
 
-    if (current === "a_replanifier") return res.status(200).json({ ok: true, status: current });
+    if (current !== "proposee" && current !== "a_replanifier") return res.status(409).json({ error: "Ce rendez-vous n'est plus disponible" });
     const message = String(body.message || "").trim().slice(0, 2000);
-    const { error } = await supabase.from("quote_requests").update({ appointment_status: "a_replanifier", appointment_responded_at: new Date().toISOString(), client_response: message || null }).eq("id", q.id);
-    if (error) return res.status(500).json({ error: "Mise à jour impossible" });
-    await Promise.all([
-      resend.emails.send({ from, to: q.email, replyTo: adminEmail, ...clientRescheduleReceived(q, message, siteUrl) }),
-      resend.emails.send({ from, to: adminEmail, replyTo: q.email, ...adminRescheduleRequested(q, appt, message, siteUrl) }),
+    if (current === "proposee") {
+      const { error } = await supabase.from("quote_requests").update({ appointment_status: "a_replanifier", appointment_responded_at: new Date().toISOString(), client_response: message || null }).eq("id", q.id);
+      if (error) return res.status(500).json({ error: "Mise à jour impossible" });
+    }
+    const key = `${q.id}-${loaded.row.appointment_token}`;
+    const sent = await sendEmails([
+      () => resend.emails.send({ from, to: q.email, replyTo: adminEmail, ...clientRescheduleReceived(q, message, siteUrl) }, { headers: { "Idempotency-Key": `appt-reschedule-client-${key}` } }),
+      () => resend.emails.send({ from, to: adminEmail, replyTo: q.email, ...adminRescheduleRequested(q, appt, message, siteUrl) }, { headers: { "Idempotency-Key": `appt-reschedule-admin-${key}` } }),
     ]);
+    if (!sent) return res.status(502).json({ error: "Demande enregistrée, email non envoyé" });
     return res.status(200).json({ ok: true, status: "a_replanifier" });
   }
 
