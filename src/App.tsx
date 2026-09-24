@@ -1,7 +1,8 @@
-import { FormEvent, lazy, ReactNode, Suspense, useEffect, useState } from "react";
+import { createContext, FormEvent, lazy, ReactNode, Suspense, useContext, useEffect, useLayoutEffect, useState } from "react";
 import { BrowserRouter, Link, NavLink, Navigate, Route, Routes, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowRight,
+  ArrowUp,
   Camera,
   Check,
   ChevronRight,
@@ -37,8 +38,21 @@ import { COOKIE_CONSENT_EVENT, getCookieConsent, openCookiePreferences, type Coo
 
 const AdminAnalytics = lazy(() => import("@/components/AdminAnalytics"));
 
-type SiteContext = { services: Service[]; gallery: GalleryItem[]; refresh: () => Promise<void> };
-let siteCache: SiteContext = { services: seedServices, gallery: seedGallery, refresh: async () => undefined };
+type SiteContext = {
+  services: Service[];
+  gallery: GalleryItem[];
+  refresh: () => Promise<void>;
+  setServices: (services: Service[]) => void;
+  setGallery: (gallery: GalleryItem[]) => void;
+};
+const SiteContentContext = createContext<SiteContext>({
+  services: seedServices,
+  gallery: seedGallery,
+  refresh: async () => undefined,
+  setServices: () => undefined,
+  setGallery: () => undefined,
+});
+const useSiteContent = () => useContext(SiteContentContext);
 const nav: PageKey[] = ["home", "portfolio", "catalogue", "about", "location", "contact"];
 const cookiePreferenceLabels: Record<Lang, string> = {
   fr: "Gérer mes cookies",
@@ -49,11 +63,33 @@ const cookiePreferenceLabels: Record<Lang, string> = {
 const makeId = () => globalThis.crypto?.randomUUID?.() || `local-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 const euro = (lang: Lang, amount: number) => (lang === "en" ? `€${amount}` : `${amount} €`);
 
+/** Les ajouts Supabase complètent le portfolio livré avec le site au lieu de le remplacer. */
+function mergeGalleryItems(primary: GalleryItem[], fallback: GalleryItem[]) {
+  const seen = new Set<string>();
+  return [...primary, ...fallback].filter((item) => {
+    if (seen.has(item.id)) return false;
+    seen.add(item.id);
+    return true;
+  });
+}
+
+/** Remonte instantanément en haut de page, même si le CSS active le défilement fluide (compatible anciens Safari). */
+function scrollToTop() {
+  const root = document.documentElement;
+  const previous = root.style.scrollBehavior;
+  root.style.scrollBehavior = "auto";
+  window.scrollTo(0, 0);
+  root.style.scrollBehavior = previous;
+}
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
+
 function ScrollTop() {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [pathname]);
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  }, []);
+  // Avant l’affichage : la nouvelle page n’apparaît jamais à la position de défilement de l’ancienne.
+  useIsomorphicLayoutEffect(scrollToTop, [pathname, search]);
   return <><SeoManager /><AnalyticsTracker /></>;
 }
 
@@ -128,7 +164,54 @@ function Layout({ children }: { children: ReactNode }) {
       )}
       <main id="content">{children}</main>
       <Footer />
+      <FloatingActions />
       <CookieBanner />
+    </div>
+  );
+}
+
+const scrollTopLabels: Record<Lang, string> = {
+  fr: "Remonter en haut de la page",
+  en: "Back to top",
+  es: "Volver arriba",
+  de: "Nach oben",
+};
+
+/** Raccourcis flottants en bas à droite : demande de devis (appareil photo) et retour en haut. */
+function FloatingActions() {
+  const { lang, t, to } = useI18n();
+  const { pathname } = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 400);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  const quotePath = to("quote");
+  const onQuotePage = pathname.replace(/\/$/, "") === quotePath.replace(/\/$/, "");
+  const backToTop = () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  };
+  return (
+    <div className="floating-actions">
+      {!onQuotePage && (
+        <Link className="floating-action floating-quote" to={quotePath} aria-label={t.cta} title={t.cta}>
+          <Camera size={20} />
+        </Link>
+      )}
+      <button
+        type="button"
+        className={`floating-action floating-top${scrolled ? " is-visible" : ""}`}
+        onClick={backToTop}
+        aria-label={scrollTopLabels[lang]}
+        title={scrollTopLabels[lang]}
+        tabIndex={scrolled ? 0 : -1}
+        aria-hidden={!scrolled}
+      >
+        <ArrowUp size={20} />
+      </button>
     </div>
   );
 }
@@ -179,8 +262,9 @@ function Footer() {
 
 function Home() {
   const { lang, t, to, service, galleryItem, category } = useI18n();
-  const services = siteCache.services.map(service);
-  const gallery = siteCache.gallery.map(galleryItem);
+  const { services: siteServices, gallery: siteGallery } = useSiteContent();
+  const services = siteServices.map(service);
+  const gallery = siteGallery.map((item) => ({ raw: item, display: galleryItem(item) }));
   return (
     <>
       <section className="hero video-hero">
@@ -234,13 +318,15 @@ function Home() {
           </Link>
         </div>
         <div className="editorial-grid">
-          {gallery.slice(0, 5).map((item, i) => (
-            <figure key={item.id} className={`editorial-${i + 1}`}>
-              <img src={item.image_url} alt={item.alt_text} loading="lazy" />
-              <figcaption>
-                <span>{item.category}</span>
-                {item.title}
-              </figcaption>
+          {gallery.slice(0, 5).map(({ raw, display }, i) => (
+            <figure key={display.id} className={`editorial-${i + 1}`}>
+              <Link to={to("portfolio", `?categorie=${encodeURIComponent(raw.category)}`)} aria-label={`${display.title} — ${display.category}`}>
+                <img src={display.image_url} alt={display.alt_text} loading="lazy" />
+                <figcaption>
+                  <span>{display.category}</span>
+                  {display.title}
+                </figcaption>
+              </Link>
             </figure>
           ))}
         </div>
@@ -308,23 +394,33 @@ function PriceCard({ service, featured = false }: { service: Service; featured?:
 
 function PortfolioPage() {
   const { t, galleryItem } = useI18n();
-  const gallery = siteCache.gallery.map(galleryItem);
-  const [filter, setFilter] = useState<string | null>(null);
-  const filters = Array.from(new Set(gallery.map((i) => i.category)));
-  const items = filter ? gallery.filter((i) => i.category === filter) : gallery;
+  const { gallery: siteGallery } = useSiteContent();
+  const [params, setParams] = useSearchParams();
+  const gallery = siteGallery.map((item) => ({ raw: item, display: galleryItem(item) }));
+  const filters = Array.from(new Set(siteGallery.map((item) => item.category)));
+  const requestedFilter = params.get("categorie");
+  const filter = requestedFilter && filters.includes(requestedFilter) ? requestedFilter : null;
+  const items = filter ? gallery.filter(({ raw }) => raw.category === filter) : gallery;
+  const selectFilter = (nextFilter: string | null) => {
+    const nextParams = new URLSearchParams(params);
+    if (nextFilter) nextParams.set("categorie", nextFilter);
+    else nextParams.delete("categorie");
+    setParams(nextParams, { replace: true });
+  };
   return (
     <PageIntro eyebrow={t.nav.portfolio} title={rich(t.portfolio.title)} text={t.portfolio.text}>
       <div className="filters" role="group" aria-label={t.portfolio.filterLabel}>
         {[null, ...filters].map((f) => (
-          <button className={filter === f ? "active" : ""} onClick={() => setFilter(f)} key={f ?? "all"} aria-pressed={filter === f}>
-            {f ?? t.portfolio.all}
+          <button className={filter === f ? "active" : ""} onClick={() => selectFilter(f)} key={f ?? "all"} aria-pressed={filter === f}>
+            <span>{f ? gallery.find(({ raw }) => raw.category === f)?.display.category ?? f : t.portfolio.all}</span>
+            <small>{f ? siteGallery.filter((item) => item.category === f).length : siteGallery.length}</small>
           </button>
         ))}
       </div>
-      <div className="masonry">
-        {items.map((item, i) => (
+      <div className="masonry" aria-live="polite">
+        {items.map(({ display: item }, i) => (
           <figure key={item.id} className={i % 5 === 0 ? "wide" : ""}>
-            <img src={item.image_url} alt={item.alt_text} loading={i < 2 ? undefined : "lazy"} />
+            <img src={item.image_url} alt={item.alt_text} loading={i < 2 ? "eager" : "lazy"} />
             <figcaption>
               <span>{item.category}</span>
               <strong>{item.title}</strong>
@@ -339,10 +435,11 @@ function PortfolioPage() {
 
 function Catalogue() {
   const { t, service } = useI18n();
+  const { services } = useSiteContent();
   return (
     <PageIntro eyebrow={t.catalogue.eyebrow} title={rich(t.catalogue.title)} text={t.catalogue.text}>
       <div className="price-grid catalogue-grid">
-        {siteCache.services.map(service).map((s, i) => (
+        {services.map(service).map((s, i) => (
           <PriceCard key={s.id} service={s} featured={i === 1} />
         ))}
       </div>
@@ -433,6 +530,7 @@ function ContactPage() {
 
 function QuotePage() {
   const { lang, t, to, service, category } = useI18n();
+  const { services } = useSiteContent();
   const [params] = useSearchParams();
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -526,7 +624,7 @@ function QuotePage() {
               <label>
                 {t.quote.formula}
                 <select name="service_id" defaultValue={params.get("formule") || "souvenir"}>
-                  {siteCache.services.map(service).map((s) => (
+                  {services.map(service).map((s) => (
                     <option value={s.id} key={s.id}>
                       {s.name} — {euro(lang, s.price)}
                     </option>
@@ -666,11 +764,18 @@ function AdminLogin() {
 
 function AdminDashboard() {
   const navigate = useNavigate();
+  const {
+    services: siteServices,
+    gallery: siteGallery,
+    setServices: setSiteServices,
+    setGallery: setSiteGallery,
+  } = useSiteContent();
   const [tab, setTab] = useState("overview");
+  useEffect(scrollToTop, [tab]);
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [views, setViews] = useState<PageView[]>([]);
-  const [gallery, setGallery] = useState(siteCache.gallery);
-  const [services, setServices] = useState(siteCache.services);
+  const [gallery, setGallery] = useState(siteGallery);
+  const [services, setServices] = useState(siteServices);
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [newService, setNewService] = useState(false);
   const [newPhoto, setNewPhoto] = useState(false);
@@ -716,6 +821,8 @@ function AdminDashboard() {
     void hydrateDashboard();
     return () => { cancelled = true; };
   }, [navigate]);
+  useEffect(() => setGallery(siteGallery), [siteGallery]);
+  useEffect(() => setServices(siteServices), [siteServices]);
   async function logout() {
     await supabase?.auth.signOut();
     sessionStorage.removeItem("instant-admin");
@@ -729,20 +836,16 @@ function AdminDashboard() {
     setQuotes((q) => q.map((x) => (x.id === id ? { ...x, ...patch } : x)));
   }
   function commitServices(update: (items: Service[]) => Service[]) {
-    setServices((items) => {
-      const next = update(items);
-      saveLocalServices(next);
-      siteCache.services = next;
-      return next;
-    });
+    const next = update(services);
+    setServices(next);
+    setSiteServices(next);
+    saveLocalServices(next);
   }
   function commitGallery(update: (items: GalleryItem[]) => GalleryItem[]) {
-    setGallery((items) => {
-      const next = update(items);
-      saveLocalGallery(next);
-      siteCache.gallery = next;
-      return next;
-    });
+    const next = update(gallery);
+    setGallery(next);
+    setSiteGallery(next);
+    saveLocalGallery(next);
   }
   async function removeGallery(item: GalleryItem) {
     if (!window.confirm(`Supprimer définitivement « ${item.title} » du portfolio ?`)) return;
@@ -1171,7 +1274,7 @@ function QuoteTable({ quotes, onStatus, onPlan }: { quotes: Quote[]; onStatus: (
     );
   return (
     <div className="table-wrap">
-      <table>
+      <table className="quote-table">
         <thead>
           <tr>
             <th>Client</th>
@@ -1188,15 +1291,15 @@ function QuoteTable({ quotes, onStatus, onPlan }: { quotes: Quote[]; onStatus: (
             const subject = encodeURIComponent("Suite à votre demande de devis — L’instant précieux");
             const message = encodeURIComponent(`Bonjour ${q.name},\n\nJe reviens vers vous concernant votre demande pour une séance ${q.category}. N’hésitez pas à me communiquer vos disponibilités afin que nous puissions avancer ensemble.\n\nÀ bientôt,\nL’instant précieux`);
             return <tr key={q.id}>
-              <td>
+              <td data-label="Client">
                 <strong>{q.name}</strong>
                 <span>{q.email}</span>
                 {q.phone ? <span>{q.phone}</span> : null}
               </td>
-              <td>{q.category}</td>
-              <td>{q.service_id}</td>
-              <td>{new Date(q.created_at).toLocaleDateString("fr-FR")}</td>
-              <td>
+              <td data-label="Projet">{q.category}</td>
+              <td data-label="Formule">{q.service_id}</td>
+              <td data-label="Date">{new Date(q.created_at).toLocaleDateString("fr-FR")}</td>
+              <td data-label="Rendez-vous">
                 {q.appointment_at && q.appointment_status ? (
                   <>
                     <strong>{formatAppointment(q.appointment_at)}</strong>
@@ -1209,7 +1312,7 @@ function QuoteTable({ quotes, onStatus, onPlan }: { quotes: Quote[]; onStatus: (
                   </button>
                 )}
               </td>
-              <td>
+              <td data-label="Statut">
                 <select value={q.status} onChange={(e) => onStatus(q.id, e.target.value)}>
                   <option value="nouvelle">Nouvelle</option>
                   <option value="acceptee">Acceptée</option>
@@ -1217,7 +1320,7 @@ function QuoteTable({ quotes, onStatus, onPlan }: { quotes: Quote[]; onStatus: (
                   <option value="archivee">Archivée</option>
                 </select>
               </td>
-              <td>
+              <td data-label="Relancer">
                 <div className="contact-actions">
                   <a href={`mailto:${q.email}?subject=${subject}&body=${message}`} aria-label={`Envoyer un email à ${q.name}`} title="Ouvrir l’application email"><Mail /><span>Email</span></a>
                   {q.phone ? <a href={`sms:${q.phone.replace(/\s/g, "")}?body=${message}`} aria-label={`Envoyer un message à ${q.name}`} title="Ouvrir l’application Messages"><MessageCircle /><span>Message</span></a> : <span className="contact-disabled" title="Aucun numéro renseigné"><MessageCircle /><span>Message</span></span>}
@@ -1377,19 +1480,27 @@ export function PublicApp() {
   const refresh = async () => {
     const remote = await loadPublicContent();
     if (remote) {
-      setData(remote);
+      const next = { ...remote, gallery: mergeGalleryItems(remote.gallery, seedGallery) };
+      setData(next);
       saveLocalServices(remote.services);
-      saveLocalGallery(remote.gallery);
+      saveLocalGallery(next.gallery);
     }
   };
   useEffect(() => {
-    setData(loadLocalContent({ services: seedServices, gallery: seedGallery }));
+    const local = loadLocalContent({ services: seedServices, gallery: seedGallery });
+    setData({ ...local, gallery: mergeGalleryItems(local.gallery, seedGallery) });
     void refresh();
   }, []);
   useSystemThemeSync();
-  siteCache = { ...data, refresh };
   return (
-    <>
+    <SiteContentContext.Provider
+      value={{
+        ...data,
+        refresh,
+        setServices: (services) => setData((current) => ({ ...current, services })),
+        setGallery: (gallery) => setData((current) => ({ ...current, gallery })),
+      }}
+    >
       <ScrollTop />
       <HeadSync />
       <Routes>
@@ -1405,7 +1516,7 @@ export function PublicApp() {
         ))}
         <Route path="*" element={<LocalizedSite lang={DEFAULT_LANG} />} />
       </Routes>
-    </>
+    </SiteContentContext.Provider>
   );
 }
 

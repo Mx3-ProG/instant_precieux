@@ -644,6 +644,11 @@ em {
   position: relative;
   overflow: hidden;
 }
+.editorial-grid figure > a {
+  display: block;
+  height: 100%;
+  color: inherit;
+}
 .editorial-grid img {
   height: 100%;
   transition: transform 0.7s;
@@ -971,6 +976,72 @@ em {
     grid-column: 1 / -1;
   }
 }
+.floating-actions {
+  position: fixed;
+  z-index: 70;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: max(clamp(1rem, 3vw, 2rem), env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+.floating-action {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: var(--ink);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--deep) 18%, transparent);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+.floating-action:hover,
+.floating-action:focus-visible {
+  border-color: var(--gold);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.floating-action:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.floating-quote {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+.floating-quote:hover,
+.floating-quote:focus-visible {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--paper);
+}
+.floating-top {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+.floating-top.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+@media (max-width: 700px) {
+  .floating-action {
+    width: 42px;
+    height: 42px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-action {
+    transition: none;
+  }
+}
 .page {
   padding-bottom: 8rem;
 }
@@ -997,6 +1068,20 @@ em {
   padding: 0.55rem 0.9rem;
   border-radius: 99px;
   font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.filters button small {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.35rem;
+  border-radius: 99px;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  font-size: 0.65rem;
+  font-variant-numeric: tabular-nums;
 }
 .filters button.active {
   background: var(--accent);
@@ -1768,6 +1853,9 @@ td select {
 }
 .modal {
   width: min(500px, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--surface);
   padding: 2rem;
   display: flex;
@@ -2323,5 +2411,84 @@ td span.appointment-badge.a_replanifier {
 @media (max-width: 700px) {
   .france-globe {
     height: min(400px, 100vw);
+  }
+}
+
+/* ───────── Responsive : écrans tactiles et téléphones ───────── */
+
+/* iOS zoome sur tout champ dont le texte fait moins de 16 px : on reste à 16 px sur mobile et tactile. */
+@media (max-width: 1000px), (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Globe du dashboard : au doigt, la page défile par-dessus au lieu d’être bloquée. */
+.traffic-globe-hint-touch {
+  display: none;
+}
+@media (pointer: coarse), (hover: none) {
+  .traffic-globe-canvas {
+    touch-action: pan-y;
+    cursor: default;
+  }
+  .traffic-globe-hint-mouse {
+    display: none;
+  }
+  .traffic-globe-hint-touch {
+    display: inline-flex;
+  }
+}
+
+/* Demandes : sur téléphone, chaque demande devient une carte lisible sans défilement horizontal. */
+@media (max-width: 700px) {
+  .table-wrap:has(.quote-table) {
+    overflow: visible;
+  }
+  .quote-table,
+  .quote-table tbody,
+  .quote-table tr,
+  .quote-table td {
+    display: block;
+    width: 100%;
+  }
+  .quote-table thead {
+    display: none;
+  }
+  .quote-table tr {
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    padding: 0.4rem 1rem;
+    margin-bottom: 0.9rem;
+  }
+  .quote-table td {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 0.15rem 0.75rem;
+    align-items: start;
+    padding: 0.7rem 0;
+  }
+  .quote-table tr td:last-child {
+    border-bottom: 0;
+  }
+  .quote-table td::before {
+    content: attr(data-label);
+    grid-row: 1 / span 3;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.2rem;
+  }
+  .quote-table td > * {
+    grid-column: 2;
+  }
+  .quote-table td select {
+    width: 100%;
+  }
+  .quote-table .contact-actions {
+    flex-direction: row;
   }
 }

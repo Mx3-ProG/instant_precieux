@@ -185,7 +185,10 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
         controls.autoRotateSpeed = 0.42;
         controls.enableDamping = true;
         controls.dampingFactor = 0.08;
-        controls.enableZoom = true;
+        // Au doigt, le globe ne capture pas les gestes : la page doit pouvoir défiler par-dessus.
+        const touchOnly = !window.matchMedia("(pointer: fine)").matches;
+        controls.enableZoom = !touchOnly;
+        controls.enableRotate = !touchOnly;
 
         const applyPalette = () => {
           if (!globe) return;
@@ -251,7 +254,7 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
       <div>
         <span className="eyebrow">Audience internationale</span>
         <h2>Origine des connexions</h2>
-        <p>Glissez pour tourner, utilisez la molette pour zoomer et sélectionnez un point pour l’explorer.</p>
+        <p>Chaque point correspond à une ville d’où le site a été consulté. Sélectionnez-en un pour l’explorer.</p>
       </div>
       <span className="live-chip">Données réelles</span>
     </div>
@@ -263,7 +266,8 @@ export default function AdminTrafficGlobe({ views }: { views: PageView[] }) {
           role="img"
           aria-label={`${locatedVisits} visites géolocalisées dans ${countries} pays. Globe interactif manipulable à la souris ou au toucher.`}
         />
-        <span className="traffic-globe-hint" aria-hidden="true">↔ Glisser pour explorer · molette pour zoomer</span>
+        <span className="traffic-globe-hint traffic-globe-hint-mouse" aria-hidden="true">↔ Glisser pour explorer · molette pour zoomer</span>
+        <span className="traffic-globe-hint traffic-globe-hint-touch" aria-hidden="true">Touchez une ville ci-dessous pour la centrer</span>
         {selectedLocation && <div className="traffic-globe-selection" aria-live="polite">
           <strong>{selectedLocation.city}</strong>
           <span>{selectedLocation.country} · {selectedLocation.visits} visite{selectedLocation.visits > 1 ? "s" : ""}</span>
