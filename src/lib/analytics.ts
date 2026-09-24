@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { getCookieConsent } from "@/lib/cookieConsent";
 
 export type PageView = {
   id: string;
@@ -6,6 +7,11 @@ export type PageView = {
   page_title: string;
   visitor_id: string;
   created_at: string;
+  country_code?: string | null;
+  region?: string | null;
+  city?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
 };
 
 const STORAGE_KEY = "instant-precieux-page-views";
@@ -28,7 +34,7 @@ export function getLocalPageViews(): PageView[] {
 }
 
 export function trackPageView(path: string, pageTitle: string) {
-  if (path.startsWith("/admin")) return;
+  if (path.startsWith("/admin") || getCookieConsent() !== "accepted") return;
   const event: PageView = {
     id: globalThis.crypto?.randomUUID?.() || `view-${Date.now()}`,
     path,
@@ -45,9 +51,17 @@ export function trackPageView(path: string, pageTitle: string) {
   }).catch(() => undefined);
 }
 
+export function clearLocalAnalytics() {
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(VISITOR_KEY);
+}
+
 export async function loadPageViews(): Promise<PageView[]> {
   if (!supabase) return getLocalPageViews();
-  const result = await supabase.from("page_views").select("id,path,page_title,visitor_id,created_at").order("created_at", { ascending: false }).limit(5000);
+  let result = await supabase.from("page_views").select("id,path,page_title,visitor_id,created_at,country_code,region,city,latitude,longitude").order("created_at", { ascending: false }).limit(5000);
+  if (result.error && /(country_code|region|city|latitude|longitude)/i.test(result.error.message)) {
+    result = await supabase.from("page_views").select("id,path,page_title,visitor_id,created_at").order("created_at", { ascending: false }).limit(5000);
+  }
   if (result.error || !result.data.length) return getLocalPageViews();
   return result.data as PageView[];
 }

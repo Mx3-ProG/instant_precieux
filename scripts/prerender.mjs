@@ -14,10 +14,18 @@ const template = await readFile(join(dist, "index.html"), "utf8");
 if (!template.includes("<!--seo-->") || !template.includes('<div id="root"></div>')) throw new Error("index.html : marqueurs de pré-rendu introuvables");
 
 // Coquille vide (non indexable) servie pour l’administration et les URL inconnues.
-await writeFile(
-  join(dist, "shell.html"),
-  template.replace(/<!--seo-->[\s\S]*?<!--\/seo-->/, '<title>L’instant précieux</title>\n    <meta name="robots" content="noindex" />'),
+const appShell = template.replace(
+  /<!--seo-->[\s\S]*?<!--\/seo-->/,
+  '<title>L’instant précieux</title>\n    <meta name="robots" content="noindex" />',
 );
+await writeFile(join(dist, "shell.html"), appShell);
+
+// Avec cleanUrls, Vercel sert ces fichiers directement pour les routes admin.
+// Les générer explicitement évite qu'une règle de fallback soit court-circuitée
+// par la résolution des fichiers statiques.
+await writeFile(join(dist, "admin.html"), appShell);
+await mkdir(join(dist, "admin"), { recursive: true });
+await writeFile(join(dist, "admin", "dashboard.html"), appShell);
 
 for (const url of routes) {
   const { html, head, htmlLang } = render(url);

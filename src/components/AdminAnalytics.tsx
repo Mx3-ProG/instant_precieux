@@ -1,4 +1,5 @@
 import type { PageView } from "@/lib/analytics";
+import AdminTrafficGlobe from "@/components/AdminTrafficGlobe";
 
 const pageLabels: Record<string, string> = {
   "/": "Accueil",
@@ -34,7 +35,9 @@ export default function AdminAnalytics({ views }: { views: PageView[] }) {
   const points = days.map((day, index) => `${36 + index * 72},${216 - day.visites / max * 166}`).join(" ");
   const areaPoints = `36,216 ${points} 468,216`;
 
-  return <section className="analytics-grid">
+  return <>
+    <AdminTrafficGlobe views={views} />
+    <section className="analytics-grid">
     <article className="dashboard-panel chart-panel">
       <div className="panel-head"><div><h2>Visibilité des pages</h2><p>Visites enregistrées au cours des 7 derniers jours.</p></div><span className="live-chip">Données réelles</span></div>
       <div className="chart-wrap" aria-label="Graphique des visites des sept derniers jours">
@@ -49,5 +52,6 @@ export default function AdminAnalytics({ views }: { views: PageView[] }) {
       <div className="panel-head"><div><h2>Pages consultées</h2><p>Classement par nombre de vues.</p></div></div>
       {pageTotals.length ? <div className="page-ranking">{pageTotals.map(([path, total]) => <div className="page-rank" key={path}><div><strong>{pageLabels[path] || path}</strong><span>{total} visite{total > 1 ? "s" : ""}</span></div><div className="rank-track"><span style={{ width: `${Math.max(8, total / pageMax * 100)}%` }}/></div></div>)}</div> : <div className="empty-analytics">Les premières visites apparaîtront ici.</div>}
     </article>
-  </section>;
+    </section>
+  </>;
 }

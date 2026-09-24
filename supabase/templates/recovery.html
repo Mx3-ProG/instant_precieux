@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>L'instant précieux</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;padding:0;background:#f3ecdf;}
+  a{color:#5c4b3f;}
+  @media (max-width:620px){
+    .card{padding:36px 24px !important;}
+    .title{font-size:34px !important;}
+    .ticket-date{font-size:26px !important;}
+    .btn a{display:block !important;}
+    .stack{display:block !important;width:auto !important;}
+    .label{border-bottom:0 !important;padding-bottom:0 !important;}
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#f3ecdf;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#f3ecdf;">Réinitialisez votre mot de passe&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3ecdf;">
+  <tr><td align="center" style="padding:40px 16px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;">
+      <tr><td align="center" style="padding:0 0 28px;">
+        <span style="font-family:'Instrument Serif', Georgia, 'Times New Roman', serif;font-size:28px;line-height:1;color:#27221d;">L'instant <em style="font-style:italic;color:#ad9362;">précieux</em></span>
+      </td></tr>
+      <tr><td class="card" style="background:#fbf8f2;border:1px solid #d7ccbd;padding:48px 44px;font-family:'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;color:#27221d;">
+        <p style="margin:0 0 14px;font-family:'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#ad9362;">Mot de passe</p>
+<h1 class="title" style="margin:0 0 22px;font-family:'Instrument Serif', Georgia, 'Times New Roman', serif;font-size:42px;line-height:1.05;font-weight:400;color:#27221d;">Un nouveau <em style="font-style:italic;color:#ad9362">mot de passe</em></h1>
+<p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#5c4b3f;">Une demande de réinitialisation du mot de passe a été faite pour <strong>{{ .Email }}</strong>. Cliquez ci-dessous pour en choisir un nouveau.</p>
+<div style="margin:30px 0 6px;"><table role="presentation" class="btn stack" cellpadding="0" cellspacing="0" border="0" style="display:inline-table;margin:0 10px 10px 0;"><tr><td style="background:#5c4b3f;border:1px solid #5c4b3f;">
+<a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:15px 26px;font-family:'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:12px;font-weight:500;letter-spacing:1.6px;text-transform:uppercase;text-decoration:none;color:#ffffff;text-align:center;">Choisir un mot de passe&nbsp;&nbsp;&rarr;</a>
+</td></tr></table></div>
+<p style="margin:0;font-size:12px;line-height:1.7;color:#70675f;">Le bouton ne fonctionne pas ? Copiez ce lien dans votre navigateur :<br><a href="{{ .ConfirmationURL }}" style="color:#5c4b3f;word-break:break-all;">{{ .ConfirmationURL }}</a></p>
+<div style="height:1px;background:#d7ccbd;margin:30px 0;line-height:1px;font-size:1px;">&nbsp;</div>
+<p style="margin:0;font-size:12px;line-height:1.7;color:#70675f;">Vous n'êtes pas à l'origine de cette demande ? Ignorez cet email, votre mot de passe actuel reste valable.</p>
+      </td></tr>
+      <tr><td align="center" style="padding:28px 12px 0;font-family:'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:12px;line-height:1.7;color:#70675f;">
+        <span style="font-family:'Instrument Serif', Georgia, 'Times New Roman', serif;font-size:16px;color:#27221d;">L'instant <em style="color:#ad9362;">précieux</em></span><br>Photographe de famille à domicile · <a href="{{ .SiteURL }}" style="color:#70675f;">{{ .SiteURL }}</a>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>

@@ -48,7 +48,7 @@ Installer Resend depuis le Vercel Marketplace ou créer une clé Resend, puis co
 
 La fonction `api/quote.ts` enregistre la demande, envoie un accusé de réception au visiteur et une notification détaillée à l'administrateur.
 
-La fonction `api/track.ts` enregistre uniquement la page, un identifiant pseudonyme généré dans le navigateur et la date. Elle ne stocke pas d'adresse IP brute. Le dashboard affiche les visiteurs, les pages vues, une courbe sur sept jours et le classement des pages.
+La fonction `api/track.ts` enregistre la page, un identifiant pseudonyme généré dans le navigateur, la date et une localisation approximative fournie par Vercel (pays, région, ville et coordonnées arrondies). Elle ne stocke pas d'adresse IP brute. Le dashboard affiche les visiteurs, les pages vues, une courbe sur sept jours, le classement des pages et un globe 3D interactif des provenances.
 
 Le build génère automatiquement `robots.txt`, `sitemap.xml`, `llms.txt` et `ia.txt` avec le domaine fourni dans `SITE_URL`.
 

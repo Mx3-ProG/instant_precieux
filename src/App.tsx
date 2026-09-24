@@ -22,7 +22,7 @@ import {
   X,
 } from "lucide-react";
 import { categories, gallery as seedGallery, services as seedServices, type GalleryItem, type Service } from "@/content";
-import { deleteGalleryImage, deleteRow, hasSupabase, loadPublicContent, loadQuotes, saveRow, signInAdmin, supabase, updateQuoteStatus, uploadGalleryImage } from "@/lib/supabase";
+import { appointmentAction, deleteGalleryImage, deleteRow, hasSupabase, loadPublicContent, loadQuotes, saveRow, signInAdmin, supabase, updateQuoteStatus, uploadGalleryImage } from "@/lib/supabase";
 import { loadPageViews, trackPageView, type PageView } from "@/lib/analytics";
 import { loadLocalContent, saveLocalGallery, saveLocalServices } from "@/lib/localContent";
 import SeoManager from "@/components/SeoManager";
@@ -31,12 +31,20 @@ import { DEFAULT_LANG, LANGS, PAGES, type Lang, type LegalKey, type PageKey } fr
 import { HeadSync, LangProvider, LanguageMenu, ThemeToggle, rich, useI18n, useSystemThemeSync } from "@/locale";
 import RisingParticles from "@/components/RisingParticles";
 import WatercolorBackground from "@/components/WatercolorBackground";
+import CookieBanner from "@/components/CookieBanner";
+import { COOKIE_CONSENT_EVENT, getCookieConsent, openCookiePreferences, type CookieConsent } from "@/lib/cookieConsent";
 
 const AdminAnalytics = lazy(() => import("@/components/AdminAnalytics"));
 
 type SiteContext = { services: Service[]; gallery: GalleryItem[]; refresh: () => Promise<void> };
 let siteCache: SiteContext = { services: seedServices, gallery: seedGallery, refresh: async () => undefined };
 const nav: PageKey[] = ["home", "portfolio", "catalogue", "about", "location", "contact"];
+const cookiePreferenceLabels: Record<Lang, string> = {
+  fr: "Gérer mes cookies",
+  en: "Manage cookies",
+  es: "Gestionar cookies",
+  de: "Cookies verwalten",
+};
 const makeId = () => globalThis.crypto?.randomUUID?.() || `local-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 const euro = (lang: Lang, amount: number) => (lang === "en" ? `€${amount}` : `${amount} €`);
 
@@ -51,7 +59,19 @@ function ScrollTop() {
 function AnalyticsTracker() {
   const { pathname } = useLocation();
   useEffect(() => {
-    trackPageView(pathname, document.title.split("|")[0].trim() || "L’instant précieux");
+    let tracked = false;
+    const trackAcceptedView = () => {
+      if (!tracked && getCookieConsent() === "accepted") {
+        tracked = true;
+        trackPageView(pathname, document.title.split("|")[0].trim() || "L’instant précieux");
+      }
+    };
+    const handleConsent = (event: Event) => {
+      if ((event as CustomEvent<CookieConsent>).detail === "accepted") trackAcceptedView();
+    };
+    trackAcceptedView();
+    window.addEventListener(COOKIE_CONSENT_EVENT, handleConsent);
+    return () => window.removeEventListener(COOKIE_CONSENT_EVENT, handleConsent);
   }, [pathname]);
   return null;
 }
@@ -107,12 +127,13 @@ function Layout({ children }: { children: ReactNode }) {
       )}
       <main id="content">{children}</main>
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
 
 function Footer() {
-  const { t, to } = useI18n();
+  const { lang, t, to } = useI18n();
   const legal = t.legal.pages;
   return (
     <footer className="footer">
@@ -136,6 +157,9 @@ function Footer() {
         <Link to={to("privacy")}>{legal.privacy.title}</Link>
         <Link to={to("terms")}>{legal.terms.title}</Link>
         <Link to={to("cookies")}>{legal.cookies.title}</Link>
+        <button type="button" className="footer-cookie-button" onClick={openCookiePreferences}>
+          {cookiePreferenceLabels[lang]}
+        </button>
       </div>
       <div>
         <p className="footer-title">{t.footer.write}</p>
@@ -421,6 +445,9 @@ function QuotePage() {
     setLoading(true);
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
+    // Libellé traduit de la catégorie, repris dans l’email envoyé au client.
+    const categorySelect = e.currentTarget.elements.namedItem("category") as HTMLSelectElement | null;
+    payload.category_label = categorySelect?.selectedOptions[0]?.text ?? "";
     try {
       const response = await fetch("/api/quote", {
         method: "POST",
@@ -583,6 +610,13 @@ type Quote = {
   status: string;
   created_at: string;
   message?: string;
+  preferred_date?: string | null;
+  appointment_at?: string | null;
+  appointment_duration?: number | null;
+  appointment_location?: string | null;
+  appointment_note?: string | null;
+  appointment_status?: "proposee" | "confirmee" | "a_replanifier" | null;
+  client_response?: string | null;
 };
 function AdminLogin() {
   const navigate = useNavigate();
@@ -644,16 +678,44 @@ function AdminDashboard() {
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [photoError, setPhotoError] = useState("");
   const [photoUploading, setPhotoUploading] = useState(false);
+  const [planning, setPlanning] = useState<Quote | null>(null);
+  const [params] = useSearchParams();
+  // Lien « Proposer une date » des emails admin : /admin/dashboard?demande=<id>
+  const requestedQuote = params.get("demande");
+  useEffect(() => {
+    if (!requestedQuote) return;
+    const match = quotes.find((q) => q.id === requestedQuote);
+    if (!match) return;
+    setTab("quotes");
+    setPlanning(match);
+  }, [requestedQuote, quotes]);
   useEffect(() => {
     if (sessionStorage.getItem("instant-admin") !== "true") {
       navigate("/admin");
       return;
     }
-    const local = JSON.parse(localStorage.getItem("instant-precieux-quotes") || "[]");
-    loadQuotes()
-      .then((remote) => setQuotes((remote.length ? remote : local) as Quote[]))
-      .catch(() => setQuotes(local));
-    loadPageViews().then(setViews).catch(() => setViews([]));
+    let cancelled = false;
+    const hydrateDashboard = async () => {
+      if (supabase) {
+        const { data, error } = await supabase.auth.getSession();
+        const isAdmin = data.session?.user.app_metadata?.role === "admin";
+        if (error || !isAdmin) {
+          sessionStorage.removeItem("instant-admin");
+          navigate("/admin");
+          return;
+        }
+      }
+      const local = JSON.parse(localStorage.getItem("instant-precieux-quotes") || "[]");
+      const [remoteQuotes, pageViews] = await Promise.all([
+        loadQuotes().catch(() => local),
+        loadPageViews().catch(() => []),
+      ]);
+      if (cancelled) return;
+      setQuotes((remoteQuotes.length ? remoteQuotes : local) as Quote[]);
+      setViews(pageViews);
+    };
+    void hydrateDashboard();
+    return () => { cancelled = true; };
   }, [navigate]);
   async function logout() {
     await supabase?.auth.signOut();
@@ -663,6 +725,9 @@ function AdminDashboard() {
   async function setStatus(id: string, status: string) {
     setQuotes((q) => q.map((x) => (x.id === id ? { ...x, status } : x)));
     await updateQuoteStatus(id, status).catch(() => undefined);
+  }
+  function patchQuote(id: string, patch: Partial<Quote>) {
+    setQuotes((q) => q.map((x) => (x.id === id ? { ...x, ...patch } : x)));
   }
   function commitServices(update: (items: Service[]) => Service[]) {
     setServices((items) => {
@@ -855,7 +920,7 @@ function AdminDashboard() {
             </Suspense>
             <section className="dashboard-panel">
               <h2>Dernières demandes</h2>
-              <QuoteTable quotes={quotes.slice(0, 5)} onStatus={setStatus} />
+              <QuoteTable quotes={quotes.slice(0, 5)} onStatus={setStatus} onPlan={setPlanning} />
             </section>
           </>
         )}
@@ -922,14 +987,14 @@ function AdminDashboard() {
             <div className="panel-head">
               <div>
                 <h2>Toutes les demandes</h2>
-                <p>Acceptez, refusez ou gardez une demande en attente.</p>
+                <p>Proposez une date de rendez-vous : le client la confirme en un clic depuis son email.</p>
               </div>
               <label className="search">
                 <Search />
                 <input placeholder="Rechercher" />
               </label>
             </div>
-            <QuoteTable quotes={quotes} onStatus={setStatus} />
+            <QuoteTable quotes={quotes} onStatus={setStatus} onPlan={setPlanning} />
           </section>
         )}
       </section>
@@ -1000,11 +1065,103 @@ function AdminDashboard() {
           </form>
         </div>
       )}
+      {planning && (
+        <AppointmentModal
+          quote={planning}
+          onClose={() => setPlanning(null)}
+          onSaved={(patch) => {
+            patchQuote(planning.id, patch);
+            setPlanning(null);
+          }}
+        />
+      )}
     </div>
   );
 }
 
-function QuoteTable({ quotes, onStatus }: { quotes: Quote[]; onStatus: (id: string, status: string) => void }) {
+const APPOINTMENT_LABELS = { proposee: "Date proposée", confirmee: "Confirmé", a_replanifier: "Autre date demandée" } as const;
+const formatAppointment = (iso: string) =>
+  new Date(iso).toLocaleString("fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" });
+/** Valeur par défaut du champ datetime-local : date souhaitée par le client à 10 h, sinon dans une semaine. */
+function defaultSlot(q: Quote) {
+  const base = q.appointment_at ? new Date(q.appointment_at) : q.preferred_date ? new Date(`${q.preferred_date}T10:00`) : new Date(Date.now() + 7 * 86400000);
+  if (!q.appointment_at && !q.preferred_date) base.setHours(10, 0, 0, 0);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${base.getFullYear()}-${pad(base.getMonth() + 1)}-${pad(base.getDate())}T${pad(base.getHours())}:${pad(base.getMinutes())}`;
+}
+
+function AppointmentModal({ quote, onClose, onSaved }: { quote: Quote; onClose: () => void; onSaved: (patch: Partial<Quote>) => void }) {
+  const [mode, setMode] = useState<"propose" | "refuse">("propose");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    const form = new FormData(e.currentTarget);
+    try {
+      if (mode === "refuse") {
+        await appointmentAction({ action: "refuse", id: quote.id, message: form.get("message") });
+        onSaved({ status: "refusee", appointment_status: null });
+      } else {
+        const result = await appointmentAction({
+          action: "propose",
+          id: quote.id,
+          appointment_at: new Date(String(form.get("appointment_at"))).toISOString(),
+          duration: Number(form.get("duration")),
+          location: form.get("location"),
+          note: form.get("note"),
+        });
+        onSaved({ status: "acceptee", appointment_status: "proposee", client_response: null, ...(result as Partial<Quote>) });
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Envoi impossible");
+    } finally {
+      setLoading(false);
+    }
+  }
+  return (
+    <div className="modal-backdrop">
+      <form className="modal" onSubmit={submit}>
+        <button type="button" className="modal-close" onClick={onClose} aria-label="Fermer"><X /></button>
+        <p className="eyebrow">{mode === "propose" ? "Proposer un rendez-vous" : "Décliner la demande"}</p>
+        <h2>{quote.name}</h2>
+        <p className="appointment-context">
+          {quote.category}
+          {quote.preferred_date ? ` · souhaitée le ${new Date(`${quote.preferred_date}T12:00`).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })}` : " · date flexible"}
+        </p>
+        {quote.appointment_status === "a_replanifier" && quote.client_response && (
+          <blockquote className="appointment-response">« {quote.client_response} »</blockquote>
+        )}
+        {mode === "propose" ? (
+          <div className="modal-fields">
+            <label>Date et heure<input name="appointment_at" type="datetime-local" required defaultValue={defaultSlot(quote)} /></label>
+            <label>
+              Durée
+              <select name="duration" defaultValue={String(quote.appointment_duration || 90)}>
+                {[45, 60, 90, 120, 180].map((m) => <option key={m} value={m}>{m < 60 ? `${m} min` : `${Math.floor(m / 60)} h${m % 60 ? ` ${m % 60}` : ""}`}</option>)}
+              </select>
+            </label>
+            <label>Lieu<input name="location" required defaultValue={quote.appointment_location || quote.city || ""} placeholder="Adresse ou commune" /></label>
+            <label>Un mot pour le client<textarea name="note" defaultValue={quote.appointment_note || ""} placeholder="Quelques conseils, une précision sur le déroulé…" /></label>
+          </div>
+        ) : (
+          <label>Message personnel (facultatif)<textarea name="message" placeholder="Ex. : je suis complète jusqu’en décembre, mais je serais ravie de vous photographier au printemps." /></label>
+        )}
+        {error && <p className="form-error">{error}</p>}
+        <button className="button primary" disabled={loading}>
+          {loading ? "Envoi…" : mode === "propose" ? "Envoyer la proposition" : "Envoyer la réponse"}
+          <ArrowRight size={17} />
+        </button>
+        <button type="button" className="text-link appointment-switch" onClick={() => setMode(mode === "propose" ? "refuse" : "propose")}>
+          {mode === "propose" ? "Décliner cette demande" : "Revenir à la proposition de date"}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+function QuoteTable({ quotes, onStatus, onPlan }: { quotes: Quote[]; onStatus: (id: string, status: string) => void; onPlan: (quote: Quote) => void }) {
   if (!quotes.length)
     return (
       <div className="empty-state">
@@ -1022,6 +1179,7 @@ function QuoteTable({ quotes, onStatus }: { quotes: Quote[]; onStatus: (id: stri
             <th>Projet</th>
             <th>Formule</th>
             <th>Date</th>
+            <th>Rendez-vous</th>
             <th>Statut</th>
             <th>Relancer</th>
           </tr>
@@ -1039,6 +1197,19 @@ function QuoteTable({ quotes, onStatus }: { quotes: Quote[]; onStatus: (id: stri
               <td>{q.category}</td>
               <td>{q.service_id}</td>
               <td>{new Date(q.created_at).toLocaleDateString("fr-FR")}</td>
+              <td>
+                {q.appointment_at && q.appointment_status ? (
+                  <>
+                    <strong>{formatAppointment(q.appointment_at)}</strong>
+                    <span className={`appointment-badge ${q.appointment_status}`}>{APPOINTMENT_LABELS[q.appointment_status]}</span>
+                  </>
+                ) : null}
+                {q.status !== "refusee" && q.status !== "archivee" && q.appointment_status !== "confirmee" && (
+                  <button type="button" className="appointment-plan" onClick={() => onPlan(q)}>
+                    {q.appointment_status ? "Nouvelle date" : "Proposer une date"}
+                  </button>
+                )}
+              </td>
               <td>
                 <select value={q.status} onChange={(e) => onStatus(q.id, e.target.value)}>
                   <option value="nouvelle">Nouvelle</option>
@@ -1074,6 +1245,115 @@ const pageElements: Record<PageKey, ReactNode> = {
   terms: <LegalPage kind="terms" />,
   cookies: <LegalPage kind="cookies" />,
 };
+
+/* ───────── Réponse du client à une proposition de rendez-vous (lien reçu par email) ───────── */
+
+const appointmentText = {
+  fr: { eyebrow: "Votre rendez-vous", title: "Un moment rien qu’à vous", hello: "Bonjour {name}, voici le créneau proposé pour votre séance.", time: "Heure", duration: "Durée", place: "Lieu", confirm: "Confirmer ce rendez-vous", other: "Proposer une autre date", otherLabel: "Vos disponibilités", otherPlaceholder: "Ex. : plutôt en semaine après 16 h, ou le samedi matin…", send: "Envoyer", back: "Revenir au créneau proposé", confirmed: "Votre séance est confirmée", confirmedText: "Un email de confirmation avec l’invitation d’agenda vient de vous être envoyé. À très bientôt !", rescheduled: "Message bien reçu", rescheduledText: "Nous revenons vers vous rapidement avec un nouveau créneau.", invalid: "Ce lien n’est plus valable", invalidText: "Une nouvelle date vous a peut-être été proposée depuis : vérifiez vos derniers emails, ou répondez-nous directement.", loading: "Chargement…", home: "Retour au site", error: "Une erreur est survenue, merci de réessayer." },
+  en: { eyebrow: "Your appointment", title: "A moment just for you", hello: "Hello {name}, here is the proposed time for your session.", time: "Time", duration: "Duration", place: "Location", confirm: "Confirm this appointment", other: "Suggest another date", otherLabel: "Your availability", otherPlaceholder: "E.g. weekdays after 4 pm, or Saturday mornings…", send: "Send", back: "Back to the proposed time", confirmed: "Your session is confirmed", confirmedText: "A confirmation email with a calendar invitation is on its way. See you soon!", rescheduled: "Message received", rescheduledText: "We’ll get back to you shortly with a new time.", invalid: "This link is no longer valid", invalidText: "A new date may have been proposed since: check your latest emails, or reply to us directly.", loading: "Loading…", home: "Back to the website", error: "Something went wrong, please try again." },
+  es: { eyebrow: "Su cita", title: "Un momento solo para ustedes", hello: "Hola {name}, este es el horario propuesto para su sesión.", time: "Hora", duration: "Duración", place: "Lugar", confirm: "Confirmar la cita", other: "Proponer otra fecha", otherLabel: "Su disponibilidad", otherPlaceholder: "P. ej.: entre semana después de las 16 h, o el sábado por la mañana…", send: "Enviar", back: "Volver al horario propuesto", confirmed: "Su sesión está confirmada", confirmedText: "Le hemos enviado un correo de confirmación con la invitación de calendario. ¡Hasta muy pronto!", rescheduled: "Mensaje recibido", rescheduledText: "Le responderemos pronto con un nuevo horario.", invalid: "Este enlace ya no es válido", invalidText: "Es posible que se le haya propuesto una nueva fecha: revise sus últimos correos o respóndanos directamente.", loading: "Cargando…", home: "Volver a la web", error: "Se ha producido un error, inténtelo de nuevo." },
+  de: { eyebrow: "Ihr Termin", title: "Ein Moment nur für Sie", hello: "Hallo {name}, hier ist der vorgeschlagene Termin für Ihr Shooting.", time: "Uhrzeit", duration: "Dauer", place: "Ort", confirm: "Termin bestätigen", other: "Anderen Termin vorschlagen", otherLabel: "Ihre Verfügbarkeit", otherPlaceholder: "Z. B. unter der Woche ab 16 Uhr oder samstagvormittags…", send: "Senden", back: "Zurück zum vorgeschlagenen Termin", confirmed: "Ihr Shooting ist bestätigt", confirmedText: "Eine Bestätigung mit Kalendereinladung ist unterwegs. Bis bald!", rescheduled: "Nachricht erhalten", rescheduledText: "Wir melden uns in Kürze mit einem neuen Termin.", invalid: "Dieser Link ist nicht mehr gültig", invalidText: "Vielleicht wurde Ihnen inzwischen ein neuer Termin vorgeschlagen: Prüfen Sie Ihre E-Mails oder antworten Sie uns direkt.", loading: "Wird geladen…", home: "Zurück zur Website", error: "Ein Fehler ist aufgetreten, bitte versuchen Sie es erneut." },
+} satisfies Record<Lang, Record<string, string>>;
+type PublicAppointment = { name: string; lang: Lang; status: "proposee" | "confirmee" | "a_replanifier"; at: string; duration: number; location: string; note?: string | null };
+const dateLocales: Record<Lang, string> = { fr: "fr-FR", en: "en-GB", es: "es-ES", de: "de-DE" };
+
+function AppointmentPage({ lang: urlLang }: { lang: Lang }) {
+  const token = useLocation().pathname.split("/").pop() || "";
+  const [params] = useSearchParams();
+  const [appt, setAppt] = useState<PublicAppointment | null>(null);
+  const [state, setState] = useState<"loading" | "ready" | "invalid" | "confirmee" | "a_replanifier">("loading");
+  const [other, setOther] = useState(params.get("action") === "autre-date");
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    fetch(`/api/appointment?token=${encodeURIComponent(token)}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((data: PublicAppointment) => {
+        setAppt(data);
+        setState(data.status === "proposee" ? "ready" : data.status);
+      })
+      .catch(() => setState("invalid"));
+  }, [token]);
+  const lang = appt?.lang ?? urlLang;
+  const t = appointmentText[lang];
+  async function respond(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+    const message = String(new FormData(e.currentTarget).get("message") || "");
+    try {
+      const response = await fetch("/api/appointment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: other ? "reschedule" : "confirm", token, message }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error);
+      setState(result.status);
+    } catch {
+      setError(t.error);
+    } finally {
+      setSending(false);
+    }
+  }
+  const home = lang === DEFAULT_LANG ? "/" : `/${lang}`;
+  const duration = appt ? (appt.duration < 60 ? `${appt.duration} min` : `${Math.floor(appt.duration / 60)} h${appt.duration % 60 ? ` ${String(appt.duration % 60).padStart(2, "0")}` : ""}`) : "";
+  return (
+    <div className="admin-login appointment-page" lang={lang}>
+      <Link className="wordmark" to={home}>
+        L’instant <em>précieux</em>
+      </Link>
+      <form onSubmit={respond}>
+        {state === "loading" && <p>{t.loading}</p>}
+        {state === "invalid" && (
+          <>
+            <p className="eyebrow">{t.eyebrow}</p>
+            <h1>{t.invalid}</h1>
+            <p>{t.invalidText}</p>
+          </>
+        )}
+        {(state === "confirmee" || state === "a_replanifier") && (
+          <>
+            <span className="appointment-check"><Check /></span>
+            <p className="eyebrow">{t.eyebrow}</p>
+            <h1>{state === "confirmee" ? t.confirmed : t.rescheduled}</h1>
+            <p>{state === "confirmee" ? t.confirmedText : t.rescheduledText}</p>
+          </>
+        )}
+        {state === "ready" && appt && (
+          <>
+            <p className="eyebrow">{t.eyebrow}</p>
+            <h1>{t.title}</h1>
+            <p>{t.hello.replace("{name}", appt.name)}</p>
+            <div className="appointment-ticket">
+              <strong>{new Date(appt.at).toLocaleDateString(dateLocales[lang], { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Paris" })}</strong>
+              <dl>
+                <div><dt>{t.time}</dt><dd>{new Date(appt.at).toLocaleTimeString(dateLocales[lang], { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" })}</dd></div>
+                <div><dt>{t.duration}</dt><dd>{duration}</dd></div>
+                <div><dt>{t.place}</dt><dd>{appt.location}</dd></div>
+              </dl>
+            </div>
+            {appt.note && <blockquote className="appointment-response">{appt.note}</blockquote>}
+            {other && (
+              <label>
+                {t.otherLabel}
+                <textarea name="message" rows={4} required placeholder={t.otherPlaceholder} />
+              </label>
+            )}
+            {error && <p className="form-error">{error}</p>}
+            <button className="button primary" disabled={sending}>
+              {other ? t.send : t.confirm} <ArrowRight size={17} />
+            </button>
+            <button type="button" className="text-link appointment-switch" onClick={() => setOther(!other)}>
+              {other ? t.back : t.other}
+            </button>
+          </>
+        )}
+        {state !== "ready" && state !== "loading" && <Link to={home}>{t.home}</Link>}
+      </form>
+    </div>
+  );
+}
 
 /** Site public d’une langue : les chemins sont relatifs au préfixe de langue ("/", "/en/", …). */
 function LocalizedSite({ lang }: { lang: Lang }) {
@@ -1113,6 +1393,10 @@ export function PublicApp() {
       <Routes>
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/rendez-vous/:token" element={<AppointmentPage lang={DEFAULT_LANG} />} />
+        {LANGS.filter((lang) => lang !== DEFAULT_LANG).map((lang) => (
+          <Route key={`rdv-${lang}`} path={`/${lang}/rendez-vous/:token`} element={<AppointmentPage lang={lang} />} />
+        ))}
         <Route path={`/${DEFAULT_LANG}/*`} element={<Navigate to="/" replace />} />
         {LANGS.filter((lang) => lang !== DEFAULT_LANG).map((lang) => (
           <Route key={lang} path={`/${lang}/*`} element={<LocalizedSite lang={lang} />} />

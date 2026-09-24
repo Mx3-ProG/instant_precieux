@@ -33,12 +33,17 @@ export function headTags(pathname: string) {
     `<meta data-seo property="og:description" content="${esc(meta.description)}" />`,
     `<meta data-seo property="og:url" content="${url}" />`,
     `<meta data-seo property="og:image" content="${image}" />`,
+    `<meta data-seo property="og:image:type" content="image/jpeg" />`,
+    `<meta data-seo property="og:image:width" content="1200" />`,
+    `<meta data-seo property="og:image:height" content="630" />`,
+    `<meta data-seo property="og:image:alt" content="${esc(t.meta.siteName)}" />`,
     `<meta data-seo property="og:locale" content="${t.ogLocale}" />`,
     ...LANGS.filter((l) => l !== lang).map((l) => `<meta data-seo property="og:locale:alternate" content="${dictionaries[l].ogLocale}" />`),
     `<meta data-seo name="twitter:card" content="summary_large_image" />`,
     `<meta data-seo name="twitter:title" content="${esc(meta.title)}" />`,
     `<meta data-seo name="twitter:description" content="${esc(meta.description)}" />`,
     `<meta data-seo name="twitter:image" content="${image}" />`,
+    `<meta data-seo name="twitter:image:alt" content="${esc(t.meta.siteName)}" />`,
   ];
 
   if (page === "home") {

@@ -214,8 +214,8 @@ const fr = {
         intro: "Une approche volontairement sobre du suivi en ligne.",
         sections: [
           ["Cookies essentiels", "Le site peut utiliser des cookies strictement nécessaires à la session administrateur et aux préférences de consentement."],
-          ["Mesure d’audience", "Aucun outil de mesure d’audience non essentiel n’est activé dans cette V1."],
-          ["Gestion", "Si des services optionnels sont ajoutés, un bandeau permettra d’accepter ou de refuser les catégories concernées avant leur dépôt."],
+          ["Mesure d’audience", "Après votre accord, le site enregistre les pages consultées, un identifiant pseudonyme et une localisation approximative (ville, région et pays) fournie par l’hébergeur. Aucune adresse IP n’est conservée."],
+          ["Gestion", "Le bandeau permet d’accepter ou de refuser la mesure d’audience avant tout enregistrement non essentiel. Le lien « Gérer mes cookies » présent en bas de page permet de modifier ce choix à tout moment. Un refus efface l’identifiant pseudonyme et l’historique d’audience conservés dans ce navigateur."],
           ["Durée", "Les préférences de consentement seront conservées pour une durée maximale de treize mois."],
         ],
       },
@@ -436,8 +436,8 @@ const en: Dict = {
         intro: "A deliberately minimal approach to online tracking.",
         sections: [
           ["Essential cookies", "The website may use cookies that are strictly necessary for the admin session and consent preferences."],
-          ["Audience measurement", "No non-essential analytics tool is enabled in this V1."],
-          ["Management", "If optional services are added, a banner will let you accept or refuse the relevant categories before they are set."],
+          ["Audience measurement", "After you consent, the website records viewed pages, a pseudonymous identifier and an approximate location (city, region and country) supplied by the hosting provider. No IP address is retained."],
+          ["Management", "The banner lets you accept or refuse audience measurement before any non-essential record is created. The “Manage my cookies” link in the footer lets you change this choice at any time. Refusing deletes the pseudonymous identifier and audience history stored in this browser."],
           ["Duration", "Consent preferences will be kept for a maximum of thirteen months."],
         ],
       },
@@ -671,8 +671,8 @@ const es: Dict = {
         intro: "Un enfoque deliberadamente sobrio del seguimiento en línea.",
         sections: [
           ["Cookies esenciales", "El sitio puede utilizar cookies estrictamente necesarias para la sesión de administración y las preferencias de consentimiento."],
-          ["Medición de audiencia", "En esta V1 no se ha activado ninguna herramienta de medición de audiencia no esencial."],
-          ["Gestión", "Si se añaden servicios opcionales, un banner permitirá aceptar o rechazar las categorías correspondientes antes de su instalación."],
+          ["Medición de audiencia", "Tras su consentimiento, el sitio registra las páginas consultadas, un identificador seudónimo y una ubicación aproximada (ciudad, región y país) proporcionada por el proveedor de alojamiento. No se conserva la dirección IP."],
+          ["Gestión", "El banner permite aceptar o rechazar la medición de audiencia antes de cualquier registro no esencial. El enlace «Gestionar mis cookies» del pie de página permite modificar esta elección en cualquier momento. El rechazo elimina el identificador seudónimo y el historial de audiencia guardados en este navegador."],
           ["Duración", "Las preferencias de consentimiento se conservarán durante un máximo de trece meses."],
         ],
       },
@@ -906,8 +906,8 @@ const de: Dict = {
         intro: "Ein bewusst zurückhaltender Umgang mit Online-Tracking.",
         sections: [
           ["Notwendige Cookies", "Die Website kann Cookies verwenden, die für die Admin-Sitzung und die Einwilligungseinstellungen unbedingt erforderlich sind."],
-          ["Reichweitenmessung", "In dieser V1 ist kein nicht notwendiges Analyse-Tool aktiviert."],
-          ["Verwaltung", "Werden optionale Dienste hinzugefügt, können Sie die betreffenden Kategorien über ein Banner annehmen oder ablehnen, bevor sie gesetzt werden."],
+          ["Reichweitenmessung", "Nach Ihrer Zustimmung speichert die Website besuchte Seiten, eine pseudonyme Kennung und einen ungefähren Standort (Stadt, Region und Land), den der Hosting-Anbieter bereitstellt. Die IP-Adresse wird nicht gespeichert."],
+          ["Verwaltung", "Über das Banner können Sie die Reichweitenmessung annehmen oder ablehnen, bevor nicht notwendige Daten gespeichert werden. Über den Link „Cookie-Einstellungen“ in der Fußzeile lässt sich die Auswahl jederzeit ändern. Bei Ablehnung werden die pseudonyme Kennung und der lokal gespeicherte Reichweitenverlauf gelöscht."],
           ["Dauer", "Einwilligungseinstellungen werden höchstens dreizehn Monate gespeichert."],
         ],
       },

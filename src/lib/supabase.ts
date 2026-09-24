@@ -99,6 +99,20 @@ export async function loadQuotes() {
   return result.data;
 }
 
+/** Actions administrateur sur un rendez-vous (proposition de date, refus) : l’API envoie les emails. */
+export async function appointmentAction(payload: Record<string, unknown>) {
+  if (!supabase) throw new Error("Supabase n’est pas configuré");
+  const { data } = await supabase.auth.getSession();
+  const response = await fetch("/api/appointment", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${data.session?.access_token ?? ""}` },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || "Envoi impossible");
+  return result as Record<string, unknown>;
+}
+
 export async function updateQuoteStatus(id: string, status: string) {
   if (!supabase) return;
   const result = await supabase.from("quote_requests").update({ status }).eq("id", id);

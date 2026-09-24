@@ -32,3 +32,6 @@ temp
 *.sln
 *.sw?
 .gstack/
+supabase/.temp/
+.vercel
+.env*
